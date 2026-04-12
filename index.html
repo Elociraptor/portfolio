@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ole Marwede — Developer</title>
+  <meta name="description" content="Portfolio von Ole Marwede — Medieninformatik Student an der HTW Berlin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-prompt">
+    <span class="p-name">om</span><span class="p-dot">.</span>
+    <span class="p-path">&nbsp;~/portfolio</span>
+    <span class="p-dollar">&nbsp;$</span>
+  </div>
+  <div class="nav-right">
+    <a href="#projects" class="nav-link">./projects</a>
+    <a href="#skills"   class="nav-link">./skills</a>
+    <a href="#experience" class="nav-link">./experience</a>
+    <a href="#contact"  class="nav-link">./contact</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="de">DE</button>
+      <button class="lang-btn"        data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-glow" id="hero-glow"></div>
+  <div class="hero-inner">
+
+    <!-- Left -->
+    <div class="hero-left">
+
+      <div class="hero-avail">
+        <span class="avail-dot"></span>
+        <span data-de="verfügbar · Berlin" data-en="available · Berlin">verfügbar · Berlin</span>
+      </div>
+
+      <div class="hero-eyebrow">// student · developer</div>
+
+      <div class="hero-name">
+        <span class="hero-name-1">Ole</span>
+        <span class="hero-name-2">Marwede<span class="name-dot">.</span></span>
+      </div>
+
+      <p class="hero-tagline"
+         data-de="Ich baue Dinge, die funktionieren — und gut aussehen."
+         data-en="I build things that work — and look great.">
+        Ich baue Dinge, die funktionieren — und gut aussehen.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">$ ./work</a>
+        <a href="#contact"  class="btn-ghost">./contact</a>
+      </div>
+    </div>
+
+    <!-- Right: Terminal -->
+    <div class="hero-right">
+      <div class="terminal-window">
+        <div class="term-titlebar">
+          <span class="term-dot term-dot-1"></span>
+          <span class="term-dot term-dot-2"></span>
+          <span class="term-dot term-dot-3"></span>
+          <span class="term-title">about.md</span>
+        </div>
+        <div class="term-body" id="term-output"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     PROJECTS
+══════════════════════════════════════════════════════════ -->
+<section id="projects" class="section">
+  <div class="section-inner">
+
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow"
+             data-de="// auswahl" data-en="// selection">// auswahl</div>
+        <h2 class="section-title"
+            data-de="Projekte" data-en="Projects">Projekte</h2>
+      </div>
+      <span class="section-count">05</span>
+    </div>
+
+    <div class="bento-grid">
+
+      <!-- dkwdp — Featured -->
+      <div class="card-shell col-7" onclick="location.href='projects/dkwdp.html'">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag"
+                  data-de="Semesterprojekt SS25" data-en="Semester Project SS25">Semesterprojekt SS25</span>
+            <div class="card-links">
+              <a class="card-link-btn" href="https://dkwdp.f4.htw-berlin.de/" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Live">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+              <a class="card-link-btn" href="https://github.com/dkwdp/Der-kleine-Weg-des-Programmierens" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="card-title">Der kleine Weg des Programmierens</h3>
+          <div class="card-role">// full-stack · interactive learning</div>
+          <p class="card-desc"
+             data-de="Interaktive Lernplattform für Kinder beim CoderDojo Schöneweide. Levelbasiertes System mit integriertem Code-Editor, KI-Maskottchen und p5.js Canvas. Entwickelt im 7-köpfigen Team als Semesterprojekt."
+             data-en="Interactive learning platform for kids at CoderDojo Schöneweide. Level-based system with integrated code editor, AI mascot and p5.js canvas. Developed in a 7-person team as a semester project.">
+            Interaktive Lernplattform für Kinder beim CoderDojo Schöneweide. Levelbasiertes System mit integriertem Code-Editor, KI-Maskottchen und p5.js Canvas. Entwickelt im 7-köpfigen Team als Semesterprojekt.
+          </p>
+          <div class="card-footer">
+            <div class="card-tech">
+              <div class="tech-item"><span class="tech-dot" style="background:#ff3e00"></span><span class="tech-label">SvelteKit</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#3178c6"></span><span class="tech-label">TypeScript</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#ed225d"></span><span class="tech-label">p5.js</span></div>
+            </div>
+            <span class="card-more" data-de="mehr →" data-en="more →">mehr →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASML -->
+      <div class="card-shell col-5" onclick="location.href='projects/asml.html'">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag"
+                  data-de="Internship Project" data-en="Internship Project">Internship Project</span>
+            <div class="card-links">
+              <a class="card-link-btn" href="https://www.asml.com" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="ASML">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="card-title">ASML — Application Framework</h3>
+          <div class="card-role">// software architecture · MVC</div>
+          <p class="card-desc"
+             data-de="Eigenständige Entwicklung eines MATLAB Application Frameworks nach MVC-Architektur. Datenhandling, Workflow-Steuerung und Demo-Applikation zur Validierung des Framework-Designs."
+             data-en="Independent development of a MATLAB application framework following MVC architecture. Data handling, workflow management and demo application to validate the framework design.">
+            Eigenständige Entwicklung eines MATLAB Application Frameworks nach MVC-Architektur. Datenhandling, Workflow-Steuerung und Demo-Applikation zur Validierung des Framework-Designs.
+          </p>
+          <div class="card-footer">
+            <div class="card-tech">
+              <div class="tech-item"><span class="tech-dot" style="background:#e16737"></span><span class="tech-label">MATLAB</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#858585"></span><span class="tech-label">MVC</span></div>
+            </div>
+            <span class="card-more" data-de="mehr →" data-en="more →">mehr →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- kNearestNeighbor -->
+      <div class="card-shell col-4" onclick="location.href='projects/knn.html'">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag"
+                  data-de="Machine Learning" data-en="Machine Learning">Machine Learning</span>
+            <div class="card-links">
+              <a class="card-link-btn" href="https://github.com/Elociraptor/kNearestNeighbor" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="card-title">kNearestNeighbor</h3>
+          <div class="card-role">// machine learning · classification</div>
+          <p class="card-desc"
+             data-de="Eigene Implementation des K-Nearest-Neighbor-Algorithmus mit dem CIFAR-10 Datensatz. Bildklassifikation mit Python und NumPy."
+             data-en="Custom implementation of the K-Nearest-Neighbor algorithm using the CIFAR-10 dataset. Image classification with Python and NumPy.">
+            Eigene Implementation des K-Nearest-Neighbor-Algorithmus mit dem CIFAR-10 Datensatz. Bildklassifikation mit Python und NumPy.
+          </p>
+          <div class="card-footer">
+            <div class="card-tech">
+              <div class="tech-item"><span class="tech-dot" style="background:#3572A5"></span><span class="tech-label">Python</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#4dabcf"></span><span class="tech-label">NumPy</span></div>
+            </div>
+            <span class="card-more" data-de="mehr →" data-en="more →">mehr →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- dln-smartgarden -->
+      <div class="card-shell col-4" onclick="location.href='projects/smartgarden.html'">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag"
+                  data-de="IoT · Hardware" data-en="IoT · Hardware">IoT · Hardware</span>
+            <div class="card-links">
+              <a class="card-link-btn" href="https://github.com/Elociraptor/dln-smartgarden" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="card-title">dln-smartgarden</h3>
+          <div class="card-role">// IoT · automation · hardware</div>
+          <p class="card-desc"
+             data-de="Smart Garden System zur automatisierten Pflanzenpflege. Kombination aus Sensorik, Hardware-Steuerung und Python-Backend."
+             data-en="Smart garden system for automated plant care. Combination of sensors, hardware control and Python backend.">
+            Smart Garden System zur automatisierten Pflanzenpflege. Kombination aus Sensorik, Hardware-Steuerung und Python-Backend.
+          </p>
+          <div class="card-footer">
+            <div class="card-tech">
+              <div class="tech-item"><span class="tech-dot" style="background:#3572A5"></span><span class="tech-label">Python</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#22c55e"></span><span class="tech-label">IoT</span></div>
+            </div>
+            <span class="card-more" data-de="mehr →" data-en="more →">mehr →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bildverarbeitung -->
+      <div class="card-shell col-4" onclick="location.href='projects/bildverarbeitung.html'">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag"
+                  data-de="Uni Projekt" data-en="Uni Project">Uni Projekt</span>
+            <div class="card-links">
+              <a class="card-link-btn" href="https://github.com/Elociraptor" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="card-title">Bildverarbeitung</h3>
+          <div class="card-role">// computer vision · image processing</div>
+          <p class="card-desc"
+             data-de="Bildverarbeitungsprojekt im Rahmen des Medieninformatik-Studiums. Implementierung klassischer CV-Algorithmen mit Python und OpenCV."
+             data-en="Image processing project as part of the media informatics studies. Implementation of classic CV algorithms with Python and OpenCV.">
+            Bildverarbeitungsprojekt im Rahmen des Medieninformatik-Studiums. Implementierung klassischer CV-Algorithmen mit Python und OpenCV.
+          </p>
+          <div class="card-footer">
+            <div class="card-tech">
+              <div class="tech-item"><span class="tech-dot" style="background:#3572A5"></span><span class="tech-label">Python</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#5c9bd1"></span><span class="tech-label">OpenCV</span></div>
+            </div>
+            <span class="card-more" data-de="mehr →" data-en="more →">mehr →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     SKILLS
+══════════════════════════════════════════════════════════ -->
+<section id="skills" class="section">
+  <div class="section-inner">
+
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">// stack</div>
+        <h2 class="section-title">Skills</h2>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+
+      <!-- Languages -->
+      <div class="card-shell">
+        <div class="card-inner">
+          <div class="skill-group-title"
+               data-de="Sprachen" data-en="Languages">Sprachen</div>
+          <div class="skill-pills">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">Java</span>
+            <span class="skill-pill">TypeScript</span>
+            <span class="skill-pill">JavaScript</span>
+            <span class="skill-pill">HTML / CSS</span>
+            <span class="skill-pill">MATLAB</span>
+            <span class="skill-pill">Svelte</span>
+            <span class="skill-pill">SQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frameworks & Tools -->
+      <div class="card-shell">
+        <div class="card-inner">
+          <div class="skill-group-title"
+               data-de="Frameworks & Tools" data-en="Frameworks & Tools">Frameworks & Tools</div>
+          <div class="skill-pills">
+            <span class="skill-pill">SvelteKit</span>
+            <span class="skill-pill">Next.js</span>
+            <span class="skill-pill">p5.js</span>
+            <span class="skill-pill">Node.js</span>
+            <span class="skill-pill">Vite</span>
+            <span class="skill-pill">Git</span>
+            <span class="skill-pill">Jira</span>
+            <span class="skill-pill">npm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domains -->
+      <div class="card-shell">
+        <div class="card-inner">
+          <div class="skill-group-title"
+               data-de="Bereiche" data-en="Domains">Bereiche</div>
+          <div class="skill-pills">
+            <span class="skill-pill" data-de="Machine Learning" data-en="Machine Learning">Machine Learning</span>
+            <span class="skill-pill" data-de="MVC-Architektur" data-en="MVC Architecture">MVC-Architektur</span>
+            <span class="skill-pill">IoT</span>
+            <span class="skill-pill" data-de="Komponentenarchitektur" data-en="Component Architecture">Komponentenarchitektur</span>
+            <span class="skill-pill" data-de="3D-Modellierung" data-en="3D Modeling">3D-Modellierung</span>
+            <span class="skill-pill" data-de="Bildverarbeitung" data-en="Computer Vision">Bildverarbeitung</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Language Bars -->
+    <div class="lang-bars-card">
+      <div class="lang-bars-inner">
+        <div class="lang-bars-title"
+             data-de="Menschliche Sprachen" data-en="Human Languages">Menschliche Sprachen</div>
+
+        <div class="lang-bar-row">
+          <div class="lang-bar-meta">
+            <span class="lang-bar-name">Deutsch</span>
+            <span class="lang-bar-level" data-de="Muttersprache" data-en="Native">Muttersprache</span>
+          </div>
+          <div class="lang-bar-track">
+            <div class="lang-bar-fill" data-pct="100"></div>
+          </div>
+        </div>
+
+        <div class="lang-bar-row">
+          <div class="lang-bar-meta">
+            <span class="lang-bar-name">Englisch</span>
+            <span class="lang-bar-level">C1</span>
+          </div>
+          <div class="lang-bar-track">
+            <div class="lang-bar-fill" data-pct="85"></div>
+          </div>
+        </div>
+
+        <div class="lang-bar-row">
+          <div class="lang-bar-meta">
+            <span class="lang-bar-name">Französisch</span>
+            <span class="lang-bar-level">B1</span>
+          </div>
+          <div class="lang-bar-track">
+            <div class="lang-bar-fill" data-pct="60"></div>
+          </div>
+        </div>
+
+        <div class="lang-bar-row">
+          <div class="lang-bar-meta">
+            <span class="lang-bar-name">Spanisch</span>
+            <span class="lang-bar-level" data-de="Anfänger" data-en="Beginner">Anfänger</span>
+          </div>
+          <div class="lang-bar-track">
+            <div class="lang-bar-fill" data-pct="15"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     EXPERIENCE & EDUCATION
+══════════════════════════════════════════════════════════ -->
+<section id="experience" class="section">
+  <div class="section-inner">
+
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">// background</div>
+        <h2 class="section-title"
+            data-de="Erfahrung & Bildung" data-en="Experience & Education">Erfahrung & Bildung</h2>
+      </div>
+    </div>
+
+    <div class="timeline-cols">
+
+      <!-- Work -->
+      <div>
+        <div class="tl-block-label">// work</div>
+
+        <!-- ASML -->
+        <div class="tl-item featured">
+          <div class="tl-date">Sep 2025 – Dez 2025</div>
+          <div class="tl-company">ASML</div>
+          <div class="tl-role"
+               data-de="// software engineering intern" data-en="// software engineering intern">// software engineering intern</div>
+          <div class="tl-bullets">
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="Eigenständige Entwicklung eines MATLAB Application Frameworks (MVC)" data-en="Independent development of a MATLAB application framework (MVC)">Eigenständige Entwicklung eines MATLAB Application Frameworks (MVC)</span>
+            </div>
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="Design des Models, Datenhandling- und Workflow-Steuerungsfunktionen" data-en="Model design, data handling and workflow management functions">Design des Models, Datenhandling- und Workflow-Steuerungsfunktionen</span>
+            </div>
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="Demo-Applikation zur Validierung des Framework-Designs" data-en="Demo application to validate the framework design">Demo-Applikation zur Validierung des Framework-Designs</span>
+            </div>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">MATLAB</span>
+            <span class="tl-tag">MVC</span>
+            <span class="tl-tag" data-de="Niederlande" data-en="Netherlands">Niederlande</span>
+          </div>
+        </div>
+
+        <!-- dsb -->
+        <div class="tl-item">
+          <div class="tl-date">Nov 2024 – Sep 2025</div>
+          <div class="tl-company">dsb</div>
+          <div class="tl-role"
+               data-de="// werkstudent energieberatung" data-en="// working student energy consulting">// werkstudent energieberatung</div>
+          <div class="tl-bullets">
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="3D-Modellierung von Kundenhäusern" data-en="3D modeling of client buildings">3D-Modellierung von Kundenhäusern</span>
+            </div>
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="Erstellung von Sanierungsfahrplänen zur Energieberatung" data-en="Creation of renovation roadmaps for energy consulting">Erstellung von Sanierungsfahrplänen zur Energieberatung</span>
+            </div>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag" data-de="3D-Modellierung" data-en="3D Modeling">3D-Modellierung</span>
+            <span class="tl-tag">Berlin</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Education -->
+      <div>
+        <div class="tl-block-label">// education</div>
+
+        <!-- HTW Berlin -->
+        <div class="tl-item featured">
+          <div class="tl-date"
+               data-de="Okt 2023 – heute" data-en="Oct 2023 – present">Okt 2023 – heute</div>
+          <div class="tl-company">HTW Berlin</div>
+          <div class="tl-role">// b.sc. medieninformatik</div>
+          <div class="tl-bullets">
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="Notendurchschnitt 1,15" data-en="GPA 1.15">Notendurchschnitt 1,15</span>
+            </div>
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="Schwerpunkte: Web-Entwicklung, Machine Learning, Mediengestaltung" data-en="Focus: web development, machine learning, media design">Schwerpunkte: Web-Entwicklung, Machine Learning, Mediengestaltung</span>
+            </div>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">GPA 1.15</span>
+            <span class="tl-tag" data-de="Sep 2026" data-en="Sep 2026">Sep 2026</span>
+          </div>
+        </div>
+
+        <!-- Gymnasium -->
+        <div class="tl-item">
+          <div class="tl-date">2013 – 2022</div>
+          <div class="tl-company">Cäcilienschule</div>
+          <div class="tl-role"
+               data-de="// abitur · oldenburg" data-en="// abitur · oldenburg">// abitur · oldenburg</div>
+          <div class="tl-bullets">
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="Gymnasium Cäcilienschule Oldenburg" data-en="Gymnasium Cäcilienschule Oldenburg">Gymnasium Cäcilienschule Oldenburg</span>
+            </div>
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="Abitur mit Note 1,8" data-en="Abitur with grade 1.8">Abitur mit Note 1,8</span>
+            </div>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">1.8</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-eyebrow">// get in touch</div>
+    <h2 class="contact-heading"
+        data-de="Lass uns reden." data-en="Let's talk.">Lass uns reden.</h2>
+    <p class="contact-sub"
+       data-de="Offen für Projekte, Werkstudentenstellen und interessante Zusammenarbeiten. Gerne per Mail oder LinkedIn."
+       data-en="Open for projects, working student positions and interesting collaborations. Feel free to reach out via email or LinkedIn.">
+      Offen für Projekte, Werkstudentenstellen und interessante Zusammenarbeiten. Gerne per Mail oder LinkedIn.
+    </p>
+    <div class="contact-btn-wrap">
+      <a href="mailto:ole.marwede@gmail.com" class="btn-primary">$ ./contact.sh</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-prompt">
+      <span class="f-name">om</span><span style="color:var(--green)">.</span>
+      <span class="f-path">&nbsp;~/portfolio</span>
+      <span class="f-dollar">&nbsp;$</span>
+      <span class="footer-cursor"></span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/ole-marwede" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+      <a href="https://github.com/Elociraptor" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+      <a href="mailto:ole.marwede@gmail.com" class="footer-link">Email</a>
+    </div>
+  </footer>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="js/terminal.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

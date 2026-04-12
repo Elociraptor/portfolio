@@ -886,6 +886,16 @@ footer {
   letter-spacing: 0.05em;
 }
 .img-placeholder svg { opacity: 0.3; }
+.img-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 11px;
+}
+.detail-body > .detail-desc:only-child {
+  grid-column: 1 / -1;
+  max-width: 720px;
+}
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {

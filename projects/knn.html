@@ -19,6 +19,7 @@
     <span class="p-dollar">&nbsp;$</span>
   </div>
   <div class="nav-right">
+    <a href="../index.html#thesis"   class="nav-link">./thesis</a>
     <a href="../index.html#projects" class="nav-link">./projects</a>
     <a href="../index.html#skills"   class="nav-link">./skills</a>
     <a href="../index.html#experience" class="nav-link">./experience</a>
@@ -53,7 +54,7 @@
   <div class="detail-body">
     <div class="detail-desc">
       <h3 data-de="Über das Projekt" data-en="About the Project">Über das Projekt</h3>
-      <p data-de="Eigene Implementation des K-Nearest-Neighbor-Algorithmus für Bildklassifikation mit dem CIFAR-10 Datensatz. Das Projekt entstand als praktische Auseinandersetzung  mit grundlegenden Machine-Learning-Konzepten ohne externe ML-Bibliotheken im Rahmen eines Universitätskurses."
+      <p data-de="Eigene Implementation des K-Nearest-Neighbor-Algorithmus für Bildklassifikation mit dem CIFAR-10 Datensatz. Das Projekt entstand als praktische Auseinandersetzung mit grundlegenden Machine-Learning-Konzepten ohne externe ML-Bibliotheken im Rahmen eines Universitätskurses."
          data-en="Custom implementation of the K-Nearest-Neighbor algorithm for image classification using the CIFAR-10 dataset. The project was created as a hands-on exploration of fundamental machine learning concepts without external ML libraries in the context of a university course.">
         Eigene Implementation des K-Nearest-Neighbor-Algorithmus für Bildklassifikation mit dem CIFAR-10 Datensatz. Das Projekt entstand als praktische Auseinandersetzung mit grundlegenden Machine-Learning-Konzepten ohne externe ML-Bibliotheken im Rahmen eines Universitätskurses.
       </p>
@@ -91,10 +92,12 @@
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
-    localStorage.setItem('lang', lang);
+    try { localStorage.setItem('lang', lang); } catch (e) { /* ignore */ }
   }
   document.addEventListener('DOMContentLoaded', () => {
-    setLang(localStorage.getItem('lang') || 'de');
+    let saved = 'de';
+    try { saved = localStorage.getItem('lang') || 'de'; } catch (e) { /* ignore */ }
+    setLang(saved === 'en' ? 'en' : 'de');
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => setLang(btn.dataset.lang));
     });

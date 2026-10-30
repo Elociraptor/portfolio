@@ -17,8 +17,8 @@ function setLang(lang) {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 
-  // Persist
-  localStorage.setItem('lang', lang);
+  // Persist (Speicher kann blockiert sein, dann läuft es ohne weiter)
+  try { localStorage.setItem('lang', lang); } catch (e) { /* ignore */ }
 
   // Re-run terminal in new language
   if (window.runTerminal) window.runTerminal(lang);
@@ -44,12 +44,21 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 /* ── Hero mouse-follow glow ───────────────────────────────────── */
 const hero = document.getElementById('hero');
 const glow = document.getElementById('hero-glow');
-if (hero && glow) {
+if (hero && glow && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // Position per transform (kein Layout), gedrosselt über requestAnimationFrame
+  const GLOW_HALF = 240;   // halbe Kantenlänge von .hero-glow (480px)
+  let gx = 0, gy = 0, glowRaf = 0;
   hero.addEventListener('mousemove', (e) => {
     const rect = hero.getBoundingClientRect();
-    glow.style.left = (e.clientX - rect.left) + 'px';
-    glow.style.top  = (e.clientY - rect.top)  + 'px';
-    glow.style.opacity = '1';
+    gx = e.clientX - rect.left - GLOW_HALF;
+    gy = e.clientY - rect.top  - GLOW_HALF;
+    if (!glowRaf) {
+      glowRaf = requestAnimationFrame(() => {
+        glowRaf = 0;
+        glow.style.transform = `translate3d(${gx}px, ${gy}px, 0)`;
+        glow.style.opacity = '1';
+      });
+    }
   }, { passive: true });
   hero.addEventListener('mouseleave', () => {
     glow.style.opacity = '0';
@@ -58,8 +67,9 @@ if (hero && glow) {
 
 /* ── Init ─────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  const savedLang = localStorage.getItem('lang') || 'de';
-  setLang(savedLang);
+  let savedLang = 'de';
+  try { savedLang = localStorage.getItem('lang') || 'de'; } catch (e) { /* ignore */ }
+  setLang(savedLang === 'en' ? 'en' : 'de');
 
   document.querySelectorAll('.lang-btn').forEach((btn) => {
     btn.addEventListener('click', () => setLang(btn.dataset.lang));

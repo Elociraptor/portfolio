@@ -13,25 +13,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const ease = 'power3.out';
 
+  /* ── prefers-reduced-motion: keine Bewegung, nur Endzustände ─ */
+  // Alle Reveals/Stagger unten laufen nur ohne reduced motion. Die Sprach-
+  // balken bekommen direkt ihre Endbreite, alles andere bleibt unverändert sichtbar.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.lang-bar-fill').forEach((bar) => {
+      gsap.set(bar, { scaleX: parseFloat(bar.dataset.pct) / 100 });
+    });
+    return;
+  }
+
   /* ── Hero: staggered fade-up on load ─────────────────────── */
-  gsap.from('.hero-avail', {
-    y: 12, opacity: 0, duration: 0.5, delay: 0.0, ease,
-  });
-  gsap.from('.hero-eyebrow', {
-    y: 12, opacity: 0, duration: 0.5, delay: 0.05, ease,
-  });
-  gsap.from('.hero-name', {
-    y: 28, opacity: 0, duration: 0.8, delay: 0.15, ease,
-  });
-  gsap.from('.hero-tagline', {
-    y: 12, opacity: 0, duration: 0.5, delay: 0.32, ease,
-  });
-  gsap.from('.hero-btns', {
-    y: 12, opacity: 0, duration: 0.5, delay: 0.48, ease,
-  });
-  gsap.from('.terminal-window', {
-    y: 20, opacity: 0, duration: 0.7, delay: 0.35, ease,
-  });
+  // Nur Container/Zeilen animieren, die nicht bereits von anderem Code bewegt
+  // werden: der Terminal-Inhalt gehört terminal.js (Typewriter), die Zeilen
+  // des git-log-Blocks werden einzeln gestaffelt (nicht zusätzlich der Block).
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.from('.hero-avail', {
+      y: 12, opacity: 0, duration: 0.5, delay: 0.0, ease,
+    });
+    gsap.from('.hero-name', {
+      y: 28, opacity: 0, duration: 0.8, delay: 0.15, ease,
+    });
+    gsap.from('.gitlog-cmd', {
+      y: 12, opacity: 0, duration: 0.5, delay: 0.32, ease,
+    });
+    gsap.from('.gitlog-row', {
+      y: 12, opacity: 0, duration: 0.5, delay: 0.42, stagger: 0.09, ease,
+    });
+    gsap.from('.terminal-window', {
+      y: 20, opacity: 0, duration: 0.7, delay: 0.35, ease,
+    });
+    gsap.from('.term-chips', {
+      y: 12, opacity: 0, duration: 0.5, delay: 0.7, ease,
+    });
+  }
 
   /* ── Section headers: fade-up on scroll ──────────────────── */
   gsap.utils.toArray('.section-header').forEach((el) => {
@@ -134,6 +149,26 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     });
   });
+
+  /* ── Thesis section: scroll-reveal (.th-reveal) ───────────── */
+  // Eigene Klasse, damit nichts doppelt animiert wird (die Section nutzt
+  // weder .section-header noch .card-shell/.tl-item). Respektiert reduced motion.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.utils.toArray('.th-reveal').forEach((el, i) => {
+      gsap.from(el, {
+        y: 24,
+        opacity: 0,
+        duration: 0.6,
+        delay: (i % 2) * 0.07,
+        ease,
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+          once: true,
+        },
+      });
+    });
+  }
 
   /* ── Contact heading ─────────────────────────────────────── */
   gsap.from('.contact-heading', {

@@ -19,6 +19,7 @@
     <span class="p-dollar">&nbsp;$</span>
   </div>
   <div class="nav-right">
+    <a href="../index.html#thesis"   class="nav-link">./thesis</a>
     <a href="../index.html#projects" class="nav-link">./projects</a>
     <a href="../index.html#skills"   class="nav-link">./skills</a>
     <a href="../index.html#experience" class="nav-link">./experience</a>
@@ -76,7 +77,7 @@
 
     <div>
       <div class="img-placeholder">
-        <img  src="/portfolio/images/smartGardenImage.jpg" alt="Image of the smart garden technical parts" />
+        <img  src="../images/smartGardenImage.jpg" alt="Image of the smart garden technical parts" />
       </div>
     </div>
   </div>
@@ -98,10 +99,12 @@
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
-    localStorage.setItem('lang', lang);
+    try { localStorage.setItem('lang', lang); } catch (e) { /* ignore */ }
   }
   document.addEventListener('DOMContentLoaded', () => {
-    setLang(localStorage.getItem('lang') || 'de');
+    let saved = 'de';
+    try { saved = localStorage.getItem('lang') || 'de'; } catch (e) { /* ignore */ }
+    setLang(saved === 'en' ? 'en' : 'de');
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => setLang(btn.dataset.lang));
     });

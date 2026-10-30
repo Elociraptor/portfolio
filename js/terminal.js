@@ -1,141 +1,254 @@
 /* ============================================================
-   terminal.js — Typewriter effect for Hero terminal window
-   22ms per char, 60ms pause between lines
+   terminal.js — Typewriter-Intro für das Hero-Terminal
+
+   Zuständig nur für die Intro (cat about.md). Danach übernimmt
+   js/terminal-shell.js (interaktiver Prompt, Befehle, History).
+
+   - 22ms pro Zeichen, 60ms Pause zwischen Zeilen
+   - Intro ist per Klick / Enter / Esc / Skip-Button überspringbar
+   - prefers-reduced-motion: kein Typewriter, Intro erscheint sofort
+   - Sprachwechsel: vor Intro-Ende wird neu getippt, danach rendert
+     die Shell das gesamte Transkript in der neuen Sprache neu.
    ============================================================ */
 
-const TERMINAL_LINES = {
-  de: [
-    { type: 'cmd',   text: '$ cat about.md' },
-    { type: 'blank', text: '' },
-    { type: 'kv',    key: 'name',    val: 'Ole Marwede' },
-    { type: 'kv',    key: 'degree',  val: 'B.Sc. Medieninformatik' },
-    { type: 'kv',    key: 'school',  val: 'HTW Berlin' },
-    { type: 'kv',    key: 'gpa',     val: '1.15' },
-    { type: 'blank', text: '' },
-    { type: 'text',  text: 'Medieninformatik-Student an der HTW Berlin' },
-    { type: 'text',  text: 'mit einer Leidenschaft für Coding, Computer und Sport.' },
-    { type: 'text',  text: 'Ich liebe es, Probleme zu lösen und' },
-    { type: 'text',  text: 'neue Dinge auszuprobieren.' },
-    { type: 'blank', text: '' },
-    { type: 'kv',    key: 'status',  val: 'available · Berlin' },
-    { type: 'kv',    key: 'github',  val: 'Elociraptor' },
-    { type: 'blank', text: '' },
-  ],
-  en: [
-    { type: 'cmd',   text: '$ cat about.md' },
-    { type: 'blank', text: '' },
-    { type: 'kv',    key: 'name',    val: 'Ole Marwede' },
-    { type: 'kv',    key: 'degree',  val: 'B.Sc. Media Informatics' },
-    { type: 'kv',    key: 'school',  val: 'HTW Berlin' },
-    { type: 'kv',    key: 'gpa',     val: '1.15' },
-    { type: 'blank', text: '' },
-    { type: 'text',  text: 'Media Computer Science student at HTW Berlin' },
-    { type: 'text',  text: 'with a passion for coding, computers, and sports.' },
-    { type: 'text',  text: 'I love solving problems and trying out new things.' },
-    { type: 'blank', text: '' },
-    { type: 'kv',    key: 'status',  val: 'available · Berlin' },
-    { type: 'kv',    key: 'github',  val: 'Elociraptor' },
-    { type: 'blank', text: '' },
-  ],
-};
+(function () {
+  'use strict';
 
-const CHAR_DELAY  = 22;
-const LINE_DELAY  = 60;
+  /* TODO(Ole): Status steht nur noch im Hero-Badge (nicht mehr im Terminal), bewusst vorsichtig formuliert; Kontakt-Text gleich mitprüfen.
+     Fließtext, "now:" und "gpa:" prüfen. Die finale Bachelor-Note
+     steht bewusst NICHT drin (erst nach Bewertung), "1.15" ist überholt.
+     Studienbezeichnungen exakt wie im Zeugnis / Immatrikulation eintragen. */
+  const TERMINAL_LINES = {
+    de: [
+      { type: 'cmd',   text: '$ cat about.md' },
+      { type: 'blank', text: '' },
+      { type: 'kv',    key: 'name',    val: 'Ole Marwede' },
+      { type: 'kv',    key: 'degree',  val: 'M.Sc. Informatik · ML' },
+      { type: 'kv',    key: 'school',  val: 'HU Berlin' },
+      { type: 'kv',    key: 'gpa',     val: 'B.Sc. folgt (Note nach Bewertung)' },
+      { type: 'kv',    key: 'now',     val: 'Thesis, Master-Start, Legal Tech' },
+      { type: 'blank', text: '' },
+      { type: 'text',  text: 'Ich suche mit CLIP nach Szenen in Videos, für die Bachelorarbeit auf einer einzigen GTX 1080.' },
+      { type: 'text',  text: 'Davor: Praktikum bei ASML und eine Lernplattform für Kinder, gebaut im 7er-Team.' },
+      { type: 'text',  text: 'Ich schreibe lieber Code, der läuft, als Folien, die es versprechen.' },
+      { type: 'blank', text: '' },
+      { type: 'kv',    key: 'github',  val: 'Elociraptor' },
+      { type: 'blank', text: '' },
+      { type: 'hint',  text: "Tipp: 'help' tippen oder unten einen Befehl anklicken." },
+    ],
+    en: [
+      { type: 'cmd',   text: '$ cat about.md' },
+      { type: 'blank', text: '' },
+      { type: 'kv',    key: 'name',    val: 'Ole Marwede' },
+      { type: 'kv',    key: 'degree',  val: 'M.Sc. Computer Science · ML' },
+      { type: 'kv',    key: 'school',  val: 'HU Berlin' },
+      { type: 'kv',    key: 'gpa',     val: 'B.Sc. pending (grade after review)' },
+      { type: 'kv',    key: 'now',     val: 'thesis, master start, legal tech' },
+      { type: 'blank', text: '' },
+      { type: 'text',  text: 'I search for scenes in videos with CLIP, for my bachelor thesis on a single GTX 1080.' },
+      { type: 'text',  text: 'Before that: an internship at ASML and a learning platform for kids, built in a team of 7.' },
+      { type: 'text',  text: 'I would rather ship code that runs than slides that promise it.' },
+      { type: 'blank', text: '' },
+      { type: 'kv',    key: 'github',  val: 'Elociraptor' },
+      { type: 'blank', text: '' },
+      { type: 'hint',  text: "Tip: type 'help' or click a command below." },
+    ],
+  };
 
-let termTimeout = null;
-let currentLang = 'de';
+  const CHAR_DELAY = 22;       // Befehl und Key/Value-Zeilen
+  const TEXT_DELAY = 9;        // Fließtext und Hinweis, sonst dauert die Intro zu lange
+  const LINE_DELAY = 60;
 
-function buildLineHTML(line) {
-  switch (line.type) {
-    case 'cmd':
-      return `<span class="t-cmd">${escHtml(line.text)}</span>`;
-    case 'blank':
-      return '&nbsp;';
-    case 'kv': {
-      const pad = 8 - line.key.length;
-      const spaces = '&nbsp;'.repeat(Math.max(pad, 1));
-      return `<span class="t-indent"><span class="t-key">${escHtml(line.key)}:</span>${spaces}<span class="t-val">${escHtml(line.val)}</span></span>`;
+  const reducedMotion = () =>
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── HTML-Helfer (Shell nutzt sie ebenfalls) ───────────────── */
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  /* Alle Texte werden escaped. Einzige Ausnahme: type 'html', das ist
+     ausschließlich für feste Konstanten im Code gedacht, nie für Nutzereingaben. */
+  function buildLineHTML(line) {
+    switch (line.type) {
+      case 'cmd':
+        return `<span class="t-cmd">${escHtml(line.text)}</span>`;
+      case 'blank':
+        return '&nbsp;';
+      case 'kv': {
+        const pad = 9 - line.key.length;
+        const spaces = '&nbsp;'.repeat(Math.max(pad, 1));
+        return `<span class="t-indent"><span class="t-key">${escHtml(line.key)}:</span>${spaces}<span class="t-val">${escHtml(line.val)}</span></span>`;
+      }
+      case 'text':
+        return `<span class="t-indent t-line">${escHtml(line.text)}</span>`;
+      case 'hint':
+        return `<span class="t-hint">${escHtml(line.text)}</span>`;
+      case 'err':
+        return `<span class="t-err">${escHtml(line.text)}</span>`;
+      case 'col': {
+        const left = line.cmd
+          ? `<button type="button" class="t-link" data-cmd="${escHtml(line.cmd)}">${escHtml(line.left)}</button>`
+          : `<span class="t-key">${escHtml(line.left)}</span>`;
+        return `<span class="t-col">${left}</span> <span class="t-line">${escHtml(line.right || '')}</span>`;
+      }
+      case 'link':
+        return `<span class="t-line">${escHtml(line.text || '')}</span><button type="button" class="t-link" data-cmd="${escHtml(line.cmd)}">${escHtml(line.label)}</button>`;
+      case 'html':
+        return line.html;
+      default:
+        return escHtml(line.text || '');
     }
-    case 'text':
-      return `<span class="t-indent t-line">${escHtml(line.text)}</span>`;
-    default:
-      return escHtml(line.text);
-  }
-}
-
-function escHtml(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
-
-function typewriterLine(container, lineHTML, callback) {
-  // Create a temporary div to render HTML, then get textContent for typing
-  // For lines with HTML tags, we type the visible text and reveal the span afterwards
-  const span = document.createElement('div');
-  span.style.display = 'block';
-  container.appendChild(span);
-
-  // For blank lines, just add immediately
-  if (lineHTML === '&nbsp;') {
-    span.innerHTML = '&nbsp;';
-    setTimeout(callback, LINE_DELAY);
-    return;
   }
 
-  // Extract visible text from HTML
-  const tmp = document.createElement('div');
-  tmp.innerHTML = lineHTML;
-  const visibleText = tmp.textContent;
+  function renderTermLines(lines) {
+    return lines.map((l) => `<div>${buildLineHTML(l)}</div>`).join('');
+  }
 
-  let i = 0;
-  function typeChar() {
-    if (i < visibleText.length) {
-      // Build partial visible text, wrapped in original structure
-      const partial = visibleText.slice(0, i + 1);
-      span.textContent = partial;
-      i++;
-      termTimeout = setTimeout(typeChar, CHAR_DELAY);
+  /* ── Zustand ───────────────────────────────────────────────── */
+  let introState = 'idle';          // idle | running | done
+  let currentLang = null;
+  let termTimeout = null;
+
+  const $out  = () => document.getElementById('term-output');
+  const $term = () => document.getElementById('terminal');
+
+  function schedule(fn, ms) {
+    termTimeout = setTimeout(fn, ms);
+  }
+
+  /* Tippt den sichtbaren Text einer fertig gerenderten Zeile Zeichen für
+     Zeichen ein. Die Struktur (Einzug, Farben) steht von Anfang an, dadurch
+     springt am Zeilenende nichts. */
+  function typewriterLine(container, lineHTML, done, charDelay) {
+    const row = document.createElement('div');
+    row.innerHTML = lineHTML;
+    container.appendChild(row);
+    container.scrollTop = container.scrollHeight;
+
+    if (lineHTML === '&nbsp;') { schedule(done, LINE_DELAY); return; }
+
+    const nodes = [];
+    const walker = document.createTreeWalker(row, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    const full = nodes.map((n) => n.data);
+    nodes.forEach((n) => { n.data = ''; });
+
+    let ni = 0;
+    let ci = 0;
+    (function tick() {
+      while (ni < nodes.length && ci >= full[ni].length) { ni++; ci = 0; }
+      if (ni >= nodes.length) {
+        container.scrollTop = container.scrollHeight;
+        schedule(done, LINE_DELAY);
+        return;
+      }
+      ci++;
+      nodes[ni].data = full[ni].slice(0, ci);
+      schedule(tick, charDelay);
+    })();
+  }
+
+  function finishIntro() {
+    clearTimeout(termTimeout);
+    const out = $out();
+    const term = $term();
+    if (!out) return;
+    // Wurde per Tastatur über den Skip-Button übersprungen, geht der Fokus sonst
+    // verloren (Button wird ausgeblendet). Dann ins Eingabefeld weiterreichen.
+    const skipBtn = document.getElementById('term-skip');
+    const focusWasOnSkip = !!skipBtn && document.activeElement === skipBtn;
+    introState = 'done';
+    if (term) term.dataset.intro = 'done';
+    if (window.termShell) {
+      window.termShell.start(currentLang);
+      if (focusWasOnSkip) {
+        const field = document.getElementById('term-input');
+        if (field) field.focus({ preventScroll: true });
+      }
     } else {
-      // Replace with proper highlighted HTML
-      span.innerHTML = lineHTML;
-      setTimeout(callback, LINE_DELAY);
+      // Fallback ohne Shell: Intro statisch zeigen
+      out.innerHTML = renderTermLines(TERMINAL_LINES[currentLang]);
     }
   }
-  typeChar();
-}
 
-function runTerminal(lang) {
-  currentLang = lang;
-  const output = document.getElementById('term-output');
-  if (!output) return;
+  function skipIntro() {
+    if (introState === 'running') finishIntro();
+  }
 
-  // Clear previous
-  if (termTimeout) clearTimeout(termTimeout);
-  output.innerHTML = '';
+  function runTerminal(lang) {
+    const out = $out();
+    const term = $term();
+    if (!out || !TERMINAL_LINES[lang]) return;
 
-  const lines = TERMINAL_LINES[lang];
-  let idx = 0;
-
-  function nextLine() {
-    if (idx >= lines.length) {
-      // Add final prompt with cursor
-      const prompt = document.createElement('div');
-      prompt.innerHTML = `<span class="t-cmd">$ </span><span class="t-cursor"></span>`;
-      output.appendChild(prompt);
+    if (introState === 'done') {
+      currentLang = lang;
+      if (window.termShell) window.termShell.setLang(lang);
       return;
     }
-    const line = lines[idx++];
-    typewriterLine(output, buildLineHTML(line), nextLine);
+    if (introState === 'running' && lang === currentLang) return;
+
+    clearTimeout(termTimeout);
+    currentLang = lang;
+    if (window.termShell) window.termShell.setLang(lang);   // Labels (aria) schon jetzt umstellen
+    introState = 'running';
+    if (term) term.dataset.intro = 'running';
+    out.setAttribute('aria-live', 'off');
+    out.innerHTML = '';
+
+    if (reducedMotion()) { finishIntro(); return; }
+
+    const lines = TERMINAL_LINES[lang];
+    let idx = 0;
+    (function next() {
+      if (idx >= lines.length) { finishIntro(); return; }
+      const line = lines[idx++];
+      const fast = line.type === 'text' || line.type === 'hint';
+      typewriterLine(out, buildLineHTML(line), next, fast ? TEXT_DELAY : CHAR_DELAY);
+    })();
   }
 
-  nextLine();
-}
+  /* ── Intro überspringen: Klick, Enter/Esc, Skip-Button ─────── */
+  function wireSkip() {
+    const term = $term();
+    if (!term) return;
 
-// Expose for main.js to call on language switch
-window.runTerminal = runTerminal;
+    term.addEventListener('pointerdown', skipIntro);
 
-document.addEventListener('DOMContentLoaded', () => {
-  runTerminal('de');
-});
+    const btn = document.getElementById('term-skip');
+    if (btn) btn.addEventListener('click', skipIntro);
+
+    document.addEventListener('keydown', (e) => {
+      if (introState !== 'running') return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.key === 'Tab' || e.key === 'Shift') return;
+      // Navigationstasten (Scrollen im Log/auf der Seite) überspringen nichts
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' ', 'Spacebar',
+           'PageUp', 'PageDown', 'Home', 'End'].includes(e.key)) return;
+      // Enter/Esc nur, wenn der Fokus im Terminal oder auf der Seite (body) liegt,
+      // damit Enter auf einem anderen Link die Intro nicht als Nebeneffekt beendet.
+      const active = document.activeElement;
+      const inTerm = term.contains(active);
+      const onBody = !active || active === document.body;
+      if (inTerm || ((e.key === 'Enter' || e.key === 'Escape') && onBody)) skipIntro();
+    });
+  }
+
+  window.TERMINAL_LINES  = TERMINAL_LINES;
+  window.escHtml         = escHtml;
+  window.renderTermLines = renderTermLines;
+  window.runTerminal     = runTerminal;
+  window.skipTermIntro   = skipIntro;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    wireSkip();
+    let saved = 'de';
+    try { saved = localStorage.getItem('lang') || 'de'; } catch (e) { /* ignore */ }
+    runTerminal(saved === 'en' ? 'en' : 'de');
+  });
+})();

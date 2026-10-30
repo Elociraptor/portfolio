@@ -3,8 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ole Marwede — Developer</title>
-  <meta name="description" content="Portfolio von Ole Marwede — Medieninformatik Student an der HTW Berlin." />
+  <title>Ole Marwede — Informatik, ML &amp; Software</title>
+  <!-- TODO(Ole): title/description prüfen. Abschluss und Note erst eintragen, wenn die Bachelorarbeit bewertet ist. -->
+  <meta name="description" content="Portfolio von Ole Marwede: M.Sc. Informatik an der HU Berlin, Bachelorarbeit zu CLIP-basiertem Text-zu-Video-Retrieval, Werkstudent im Legal-Tech-Bereich." />
+  <!-- Open Graph / Twitter (LinkedIn-Vorschau). Titel/Beschreibung wie oben; bei Änderungen mitpflegen. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ole Marwede" />
+  <meta property="og:title" content="Ole Marwede — Informatik, ML &amp; Software" />
+  <meta property="og:description" content="Portfolio von Ole Marwede: M.Sc. Informatik an der HU Berlin, Bachelorarbeit zu CLIP-basiertem Text-zu-Video-Retrieval, Werkstudent im Legal-Tech-Bereich." />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <!-- TODO(Ole): Vorschaubild (ca. 1200x630 px) nach images/ legen und hier ergänzen:
+       <meta property="og:image" content="https://DEINE-DOMAIN/images/og-preview.jpg" /> (muss eine absolute URL sein)
+       dazu <meta name="twitter:image" content="…" /> und <meta name="twitter:card" content="summary_large_image" />.
+       Ebenso <meta property="og:url" content="…" /> und <link rel="canonical" href="…" />, sobald die Live-Domain feststeht (CNAME wurde gelöscht, deshalb nichts geraten). -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Ole Marwede — Informatik, ML &amp; Software" />
+  <meta name="twitter:description" content="Portfolio von Ole Marwede: M.Sc. Informatik an der HU Berlin, Bachelorarbeit zu CLIP-basiertem Text-zu-Video-Retrieval, Werkstudent im Legal-Tech-Bereich." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='70' font-family='monospace'>om.</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +38,7 @@
     <span class="p-dollar">&nbsp;$</span>
   </div>
   <div class="nav-right">
+    <a href="#thesis"   class="nav-link">./thesis</a>
     <a href="#projects" class="nav-link">./projects</a>
     <a href="#skills"   class="nav-link">./skills</a>
     <a href="#experience" class="nav-link">./experience</a>
@@ -38,46 +54,157 @@
      HERO
 ══════════════════════════════════════════════════════════ -->
 <section id="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-glow" id="hero-glow"></div>
   <div class="hero-inner">
 
     <!-- Left -->
     <div class="hero-left">
 
+      <!-- TODO(Ole): Status bewusst vorsichtig formuliert ("offen für Gespräche" statt "verfügbar"). Stimmt das noch,
+           oder soll hier etwas Konkreteres stehen (Kontakt-Text gleich mitprüfen)? -->
       <div class="hero-avail">
         <span class="avail-dot"></span>
-        <span data-de="verfügbar · Berlin" data-en="available · Berlin">verfügbar · Berlin</span>
+        <span data-de="Berlin · offen für Gespräche" data-en="Berlin · open to chat">Berlin · offen für Gespräche</span>
       </div>
 
-      <div class="hero-eyebrow">// student · developer</div>
-
-      <div class="hero-name">
+      <h1 class="hero-name">
         <span class="hero-name-1">Ole</span>
         <span class="hero-name-2">Marwede<span class="name-dot">.</span></span>
-      </div>
+      </h1>
 
-      <p class="hero-tagline"
-         data-de="Ich bringe mit Software Ideen zum Leben. Aus Leidenschaft."
-         data-en="I bring ideas to life with software. Driven by passion.">
-        Ich bringe  mit Software Ideen zum Leben. Aus Leidenschaft.
-      </p>
-
-      <div class="hero-btns">
-        <a href="#projects" class="btn-primary">$ ./work</a>
-        <a href="#contact"  class="btn-ghost">./contact</a>
+      <!-- git log: die 3 aktuellsten Dinge, jeweils anklickbar.
+           TODO(Ole): Reihenfolge/Inhalte bestätigen. Die Hashes sind reine Deko.
+           TODO(Ole): "Freshfields" im Hero okay, oder lieber neutral ("Werkstudent Legal Tech")? Freigabe klären. -->
+      <div class="gitlog">
+        <div class="gitlog-cmd"><span class="gl-prompt">$</span> git log --oneline -3</div>
+        <ul class="gitlog-list" role="list">
+          <li>
+            <a class="gitlog-row" href="#thesis">
+              <span class="gl-hash" aria-hidden="true">a3f9c21</span>
+              <span class="gl-ref">thesis</span>
+              <span class="gl-msg"
+                    data-de="Bachelorarbeit: CLIP Text-zu-Video-Retrieval"
+                    data-en="Bachelor thesis: CLIP text-to-video retrieval">Bachelorarbeit: CLIP Text-zu-Video-Retrieval</span>
+              <span class="gl-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="gitlog-row" href="#experience">
+              <span class="gl-hash" aria-hidden="true">7be10d4</span>
+              <span class="gl-ref">master</span>
+              <span class="gl-msg"
+                    data-de="M.Sc. Informatik @ HU Berlin"
+                    data-en="M.Sc. Computer Science @ HU Berlin">M.Sc. Informatik @ HU Berlin</span>
+              <span class="gl-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="gitlog-row" href="#experience">
+              <span class="gl-hash" aria-hidden="true">2c8d9ee</span>
+              <span class="gl-ref">work</span>
+              <span class="gl-msg"
+                    data-de="Werkstudent Legal Tech @ Freshfields"
+                    data-en="Working student, legal tech @ Freshfields">Werkstudent Legal Tech @ Freshfields</span>
+              <span class="gl-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <!-- Right: Terminal -->
+    <!-- Right: interaktives Terminal (Intro: js/terminal.js, Prompt: js/terminal-shell.js) -->
     <div class="hero-right">
-      <div class="terminal-window">
+      <div class="terminal-window" id="terminal" data-intro="running">
         <div class="term-titlebar">
-          <span class="term-dot term-dot-1"></span>
-          <span class="term-dot term-dot-2"></span>
-          <span class="term-dot term-dot-3"></span>
-          <span class="term-title">about.md</span>
+          <span class="term-dot term-dot-1" aria-hidden="true"></span>
+          <span class="term-dot term-dot-2" aria-hidden="true"></span>
+          <span class="term-dot term-dot-3" aria-hidden="true"></span>
+          <span class="term-title">ole@portfolio: ~</span>
         </div>
-        <div class="term-body" id="term-output"></div>
+        <div class="term-body" id="term-output" role="log" aria-live="off" aria-label="Terminal-Ausgabe" tabindex="0"></div>
+        <div class="term-foot">
+          <button type="button" class="term-skip" id="term-skip"
+                  data-de="Intro überspringen" data-en="Skip intro">Intro überspringen</button>
+          <form class="term-form" id="term-form" autocomplete="off">
+            <label class="sr-only" for="term-input"
+                   data-de="Befehl eingeben" data-en="Enter a command">Befehl eingeben</label>
+            <span class="term-ps" aria-hidden="true">$</span>
+            <input class="term-input" id="term-input" type="text" name="command"
+                   autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                   enterkeyhint="send" />
+          </form>
+        </div>
+      </div>
+
+      <!-- Fallback ohne Tippen (Touch): dieselben Befehle als Chips -->
+      <div class="term-chips" role="group" aria-label="Befehle zum Anklicken">
+        <button type="button" class="term-chip" data-cmd="whoami">whoami</button>
+        <button type="button" class="term-chip" data-cmd="ls projects">projects</button>
+        <button type="button" class="term-chip" data-cmd="cat thesis.md">thesis</button>
+        <button type="button" class="term-chip" data-cmd="open contact">contact</button>
+        <button type="button" class="term-chip" data-cmd="help">help</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     THESIS (Bachelorarbeit)
+     TODO(Ole): Metriken (R@1/R@5/R@10), finale Note (erst nach Bewertung),
+                Abgabe-/Kolloquiumsdatum und Links (PDF, Repo, Slides) ergänzen.
+══════════════════════════════════════════════════════════ -->
+<section id="thesis" class="section thesis" aria-labelledby="thesis-title">
+  <div class="section-inner">
+
+    <div class="thesis-head">
+      <div class="section-eyebrow th-reveal"
+           data-de="// bachelorarbeit · machine learning · 2026" data-en="// bachelor thesis · machine learning · 2026">// bachelorarbeit · machine learning · 2026</div>
+
+      <h2 id="thesis-title" class="thesis-title th-reveal"
+          data-de="Wie viel Fine-Tuning verträgt ein KI-Modell?"
+          data-en="How much fine-tuning can an AI model take?">Wie viel Fine-Tuning verträgt ein KI-Modell?</h2>
+
+      <!-- TODO(Ole): Offizielle englische Titelübersetzung prüfen (EN-Text ist meine Übersetzung). -->
+      <p class="thesis-subtitle th-reveal">
+        <span class="thesis-subtitle-label" data-de="// titel der arbeit" data-en="// title of the thesis">// titel der arbeit</span>
+        <span data-de="Optimierungsstrategien für CLIP-basierte Text-zu-Video-Retrieval-Systeme"
+              data-en="Optimization Strategies for CLIP-Based Text-to-Video Retrieval Systems">Optimierungsstrategien für CLIP-basierte Text-zu-Video-Retrieval-Systeme</span>
+      </p>
+
+      <p class="thesis-lead th-reveal"
+         data-de="Ich habe das KI-Modell CLIP trainiert, damit es per Textbeschreibung die passende Szene in Videos findet, und gemessen, wie weit man es anpassen kann, bevor es auf fremden Daten schlechter wird. Dafür habe ich verschiedene Fine-Tuning-Varianten in PyTorch trainiert und knapp 200 Messungen ausgewertet, alles auf einer einzelnen GTX 1080 mit 8 GB Speicher."
+         data-en="I trained the AI model CLIP to find the matching scene in videos from a text description, and measured how far you can adapt it before it gets worse on data it has not seen. For that I trained several fine-tuning variants in PyTorch and evaluated almost 200 measurements, all on a single GTX 1080 with 8 GB of memory.">Ich habe das KI-Modell CLIP trainiert, damit es per Textbeschreibung die passende Szene in Videos findet, und gemessen, wie weit man es anpassen kann, bevor es auf fremden Daten schlechter wird. Dafür habe ich verschiedene Fine-Tuning-Varianten in PyTorch trainiert und knapp 200 Messungen ausgewertet, alles auf einer einzelnen GTX 1080 mit 8 GB Speicher.</p>
+
+      <ul class="thesis-takeaways th-reveal" role="list">
+        <li>
+          <span class="th-take-k" data-de="Training mit Maß" data-en="Train in moderation">Training mit Maß</span>
+          <span class="th-take-v" data-de="Fine-Tuning hilft auf den Trainingsdaten. Mischt man die Gewichte von Original und Fine-Tuning, lässt sich einstellen, wie viel man davon behält. Auf fremden Daten liegt der beste Wert deutlich niedriger."
+                data-en="Fine-tuning helps on the training data. Blending the weights of the original and the fine-tuned model lets you dial in how much of it to keep. On unfamiliar data the best setting is noticeably lower.">Fine-Tuning hilft auf den Trainingsdaten. Mischt man die Gewichte von Original und Fine-Tuning, lässt sich einstellen, wie viel man davon behält. Auf fremden Daten liegt der beste Wert deutlich niedriger.</span>
+        </li>
+        <li>
+          <span class="th-take-k" data-de="Der Start zählt" data-en="The starting point matters">Der Start zählt</span>
+          <span class="th-take-v" data-de="Welches vortrainierte Modell man als Ausgangspunkt nimmt, bringt mehr als die Optimierungen, die ich obendrauf getestet habe."
+                data-en="Which pretrained model you start from matters more than the optimizations I tested on top.">Welches vortrainierte Modell man als Ausgangspunkt nimmt, bringt mehr als die Optimierungen, die ich obendrauf getestet habe.</span>
+        </li>
+        <li>
+          <span class="th-take-k" data-de="Mehr Eingabe ist nicht besser" data-en="More input isn't better">Mehr Eingabe ist nicht besser</span>
+          <span class="th-take-v" data-de="Ein Bild pro Sekunde Video hat am besten funktioniert, besser als doppelt oder halb so viele."
+                data-en="One frame per second of video worked best, better than twice or half as many.">Ein Bild pro Sekunde Video hat am besten funktioniert, besser als doppelt oder halb so viele.</span>
+        </li>
+      </ul>
+
+      <div class="skill-pills thesis-tags th-reveal">
+        <span class="skill-pill">PyTorch</span>
+        <span class="skill-pill">OpenCLIP</span>
+        <span class="skill-pill">Fine-Tuning</span>
+        <span class="skill-pill">WiSE-FT</span>
+        <span class="skill-pill">Evaluation</span>
+      </div>
+
+      <div class="thesis-cta th-reveal">
+        <a href="projects/bachelorarbeit.html" class="btn-primary">$ ./details</a>
       </div>
     </div>
 
@@ -97,27 +224,84 @@
         <h2 class="section-title"
             data-de="Projekte" data-en="Projects">Projekte</h2>
       </div>
-      <span class="section-count">05</span>
+      <span class="section-count">07</span>
     </div>
 
+    <!-- TODO(Ole): Optional: E-Fahrzeug-Messsystem (CAN/UDS) und IoT-Workshop an der HTW (als Eintrag "Talks & Workshops") – zeigen oder weglassen? -->
     <div class="bento-grid">
 
+      <!-- XCrawler -->
+      <!-- TODO(Ole): Repo-Link (GitHub-Icon in .card-links) erst ergänzen, wenn entschieden ist, ob das Repo öffentlich bleibt. -->
+      <!-- TODO(Ole): Thema/Kontext der wissenschaftlichen Arbeit nennen oder bewusst offen lassen (Accounts und Thema stehen absichtlich nicht auf der Seite). -->
+      <div class="card-shell col-6">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag"
+                  data-de="Datenerhebung" data-en="Data Collection">Datenerhebung</span>
+          </div>
+          <h3 class="card-title"><a class="card-stretch" href="projects/xcrawler.html">XCrawler</a></h3>
+          <div class="card-role">// web scraping · browser automation</div>
+          <p class="card-desc"
+             data-de="Python-Tool für eine wissenschaftliche Arbeit: 1.471 Tweets von 15 Accounts aus rund 19 Monaten, mit vollem Text, als Excel-Tabelle. Läufe lassen sich abbrechen, fortsetzen und wiederholen, ohne Duplikate."
+             data-en="Python tool for a scientific paper: 1,471 tweets from 15 accounts over about 19 months, with full text, as an Excel table. Runs can be aborted, resumed and repeated without duplicates.">
+            Python-Tool für eine wissenschaftliche Arbeit: 1.471 Tweets von 15 Accounts aus rund 19 Monaten, mit vollem Text, als Excel-Tabelle. Läufe lassen sich abbrechen, fortsetzen und wiederholen, ohne Duplikate.
+          </p>
+          <div class="card-footer">
+            <div class="card-tech">
+              <div class="tech-item"><span class="tech-dot" style="background:#3572A5"></span><span class="tech-label">Python</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#2ead33"></span><span class="tech-label">Playwright</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#e70488"></span><span class="tech-label">pandas</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#217346"></span><span class="tech-label">openpyxl</span></div>
+            </div>
+            <span class="card-more" data-de="mehr →" data-en="more →">mehr →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Battery-Monitoring -->
+      <!-- TODO(Ole): Finale Methodik von K_ML bestätigen und auf der Detailseite eintragen; Repo-/Projektlink ergänzen, falls vorhanden. -->
+      <div class="card-shell col-6">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag"
+                  data-de="Uni-Teamprojekt" data-en="University Team Project">Uni-Teamprojekt</span>
+          </div>
+          <h3 class="card-title"><a class="card-stretch" href="projects/battery-monitoring.html">Battery-Monitoring</a></h3>
+          <div class="card-role">// predictive maintenance · IoT · machine learning</div>
+          <p class="card-desc"
+             data-de="Teamprojekt: Batteriemonitoring für eine Fahrzeugflotte. Mein Teil ist die ML-Komponente „K_ML“ mit Health Score (0–100), RUL-Schätzung und Anomalieerkennung auf realen Felddaten."
+             data-en="Team project: battery monitoring for a vehicle fleet. My part is the ML component “K_ML” with a health score (0–100), RUL estimation and anomaly detection on real field data.">
+            Teamprojekt: Batteriemonitoring für eine Fahrzeugflotte. Mein Teil ist die ML-Komponente „K_ML“ mit Health Score (0–100), RUL-Schätzung und Anomalieerkennung auf realen Felddaten.
+          </p>
+          <div class="card-footer">
+            <div class="card-tech">
+              <div class="tech-item"><span class="tech-dot" style="background:#3572A5"></span><span class="tech-label">Python</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#f89939"></span><span class="tech-label">scikit-learn</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#336791"></span><span class="tech-label">PostgreSQL</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#2496ed"></span><span class="tech-label">Docker</span></div>
+              <div class="tech-item"><span class="tech-dot" style="background:#f46800"></span><span class="tech-label">Grafana</span></div>
+            </div>
+            <span class="card-more" data-de="mehr →" data-en="more →">mehr →</span>
+          </div>
+        </div>
+      </div>
+
       <!-- dkwdp -->
-      <div class="card-shell col-7" onclick="location.href='projects/dkwdp.html'">
+      <div class="card-shell col-7">
         <div class="card-inner">
           <div class="card-top">
             <span class="card-tag"
                   data-de="Semesterprojekt SS25" data-en="Semester Project SS25">Semesterprojekt SS25</span>
             <div class="card-links">
-              <a class="card-link-btn" href="https://dkwdp.f4.htw-berlin.de/" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Live">
+              <a class="card-link-btn" href="https://dkwdp.f4.htw-berlin.de/" target="_blank" rel="noopener" title="Live" aria-label="Live">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               </a>
-              <a class="card-link-btn" href="https://github.com/dkwdp/Der-kleine-Weg-des-Programmierens" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub">
+              <a class="card-link-btn" href="https://github.com/dkwdp/Der-kleine-Weg-des-Programmierens" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
               </a>
             </div>
           </div>
-          <h3 class="card-title">Der kleine Weg des Programmierens</h3>
+          <h3 class="card-title"><a class="card-stretch" href="projects/dkwdp.html">Der kleine Weg des Programmierens</a></h3>
           <div class="card-role">// full-stack · interactive learning for kids</div>
           <p class="card-desc"
              data-de="Interaktive Lernplattform für Kinder beim CoderDojo Schöneweide. Levelbasiertes System mit integriertem Code-Editor, KI-Maskottchen und p5.js Canvas. Entwickelt im 7-köpfigen Team als Semesterprojekt."
@@ -136,13 +320,13 @@
       </div>
 
       <!-- ASML -->
-      <div class="card-shell col-5" onclick="location.href='projects/asml.html'">
+      <div class="card-shell col-5">
         <div class="card-inner">
           <div class="card-top">
             <span class="card-tag"
                   data-de="Internship Project" data-en="Internship Project">Internship Project</span>
           </div>
-          <h3 class="card-title">ASML — Application Framework</h3>
+          <h3 class="card-title"><a class="card-stretch" href="projects/asml.html">ASML — Application Framework</a></h3>
           <div class="card-role">// software architecture · MVC</div>
           <p class="card-desc"
              data-de="Eigenständige Entwicklung eines MATLAB Application Frameworks nach MVC-Architektur. Datenhandling, Workflow-Steuerung und Demo-Applikation zur Validierung des Framework-Designs."
@@ -159,18 +343,18 @@
       </div>
 
       <!-- kNearestNeighbor -->
-      <div class="card-shell col-4" onclick="location.href='projects/knn.html'">
+      <div class="card-shell col-4">
         <div class="card-inner">
           <div class="card-top">
             <span class="card-tag"
                   data-de="Machine Learning" data-en="Machine Learning">Machine Learning</span>
             <div class="card-links">
-              <a class="card-link-btn" href="https://github.com/Elociraptor/kNearestNeighbor" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub">
+              <a class="card-link-btn" href="https://github.com/Elociraptor/kNearestNeighbor" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
               </a>
             </div>
           </div>
-          <h3 class="card-title">kNearestNeighbor</h3>
+          <h3 class="card-title"><a class="card-stretch" href="projects/knn.html">kNearestNeighbor</a></h3>
           <div class="card-role">// machine learning · classification</div>
           <p class="card-desc"
              data-de="Eigene Implementation des K-Nearest-Neighbor-Algorithmus mit dem CIFAR-10 Datensatz. Bildklassifikation mit Python und NumPy. Entstanden im Rahmen eines Machine Learning Kurses an der HTW Berlin."
@@ -188,18 +372,18 @@
       </div>
 
       <!-- smartgarden -->
-      <div class="card-shell col-4" onclick="location.href='projects/smartgarden.html'">
+      <div class="card-shell col-4">
         <div class="card-inner">
           <div class="card-top">
             <span class="card-tag"
                   data-de="IoT · Hardware" data-en="IoT · Hardware">IoT · Hardware</span>
             <div class="card-links">
-              <a class="card-link-btn" href="https://github.com/Elociraptor/dln-smartgarden" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub">
+              <a class="card-link-btn" href="https://github.com/Elociraptor/dln-smartgarden" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
               </a>
             </div>
           </div>
-          <h3 class="card-title">smartgarden</h3>
+          <h3 class="card-title"><a class="card-stretch" href="projects/smartgarden.html">smartgarden</a></h3>
           <div class="card-role">// IoT · automation · Microcontroller</div>
           <p class="card-desc"
              data-de="Smart Garden System zur automatisierten Pflanzenpflege mit ESP32, MicroPython und Node-RED — Sensorik, Hardware und Logik in einem System."
@@ -217,18 +401,14 @@
       </div>
 
       <!-- Bildverarbeitung -->
-      <div class="card-shell col-4" onclick="location.href='projects/bildverarbeitung.html'">
+      <div class="card-shell col-4">
         <div class="card-inner">
           <div class="card-top">
             <span class="card-tag"
                   data-de="Uni Projekt" data-en="Uni Project">Uni Projekt</span>
-            <div class="card-links">
-              <a class="card-link-btn" href="https://github.com/Elociraptor" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="GitHub">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-              </a>
-            </div>
+            <!-- TODO(Ole): Repo-URL für Bildverarbeitung ergänzen (GitHub-Icon in .card-links). Der alte Link zeigte nur auf das Profil und wurde entfernt. -->
           </div>
-          <h3 class="card-title">Bildverarbeitung</h3>
+          <h3 class="card-title"><a class="card-stretch" href="projects/bildverarbeitung.html">Bildverarbeitung</a></h3>
           <div class="card-role">// computer vision · image processing</div>
           <p class="card-desc"
              data-de="Bildverarbeitungsaufgaben im Rahmen des Medieninformatik-Studiums. Implementierung klassischer grundlegender Bildverarbeitungs Algorithmen in Java."
@@ -261,6 +441,10 @@
       </div>
     </div>
 
+    <!-- Bewusst nur drei kuratierte Gruppen statt Wortwolke.
+         TODO(Ole): Auswahl gegenchecken, nur aufnehmen, was du vertreten willst.
+         Offen, weil aus dem Briefing nicht bestätigt: LaTeX, scikit-learn, Docker, PostgreSQL, Grafana,
+         Node-RED, MQTT (kommen mit dem Battery-Projekt), 3D-Druck, Embedded (ESP32, MicroPython). -->
     <div class="skills-grid">
 
       <!-- Languages -->
@@ -274,9 +458,8 @@
             <span class="skill-pill">TypeScript</span>
             <span class="skill-pill">JavaScript</span>
             <span class="skill-pill">HTML / CSS</span>
-            <span class="skill-pill">MATLAB</span>
-            <span class="skill-pill">Svelte</span>
             <span class="skill-pill">SQL</span>
+            <span class="skill-pill">MATLAB</span>
           </div>
         </div>
       </div>
@@ -287,12 +470,15 @@
           <div class="skill-group-title"
                data-de="Frameworks & Tools" data-en="Frameworks & Tools">Frameworks & Tools</div>
           <div class="skill-pills">
+            <span class="skill-pill">PyTorch</span>
+            <span class="skill-pill">OpenCLIP</span>
+            <span class="skill-pill">FAISS</span>
+            <span class="skill-pill">OpenCV</span>
+            <span class="skill-pill">Streamlit</span>
             <span class="skill-pill">SvelteKit</span>
-            <span class="skill-pill">p5.js</span>
             <span class="skill-pill">Node.js</span>
             <span class="skill-pill">Git</span>
-            <span class="skill-pill">Jira</span>
-            <span class="skill-pill">npm</span>
+            <span class="skill-pill">cplace</span>
           </div>
         </div>
       </div>
@@ -304,18 +490,21 @@
                data-de="Bereiche" data-en="Domains">Bereiche</div>
           <div class="skill-pills">
             <span class="skill-pill" data-de="Machine Learning" data-en="Machine Learning">Machine Learning</span>
-            <span class="skill-pill" data-de="MVC-Architektur" data-en="MVC Architecture">MVC-Architektur</span>
-            <span class="skill-pill">IoT</span>
-            <span class="skill-pill" data-de="Komponentenarchitektur" data-en="Component Architecture">Komponentenarchitektur</span>
-            <span class="skill-pill" data-de="3D-Modellierung" data-en="3D Modeling">3D-Modellierung</span>
+            <span class="skill-pill" data-de="Information Retrieval" data-en="Information Retrieval">Information Retrieval</span>
             <span class="skill-pill" data-de="Computer Vision" data-en="Computer Vision">Computer Vision</span>
+            <span class="skill-pill" data-de="Legal Tech / Low-Code" data-en="Legal Tech / Low-Code">Legal Tech / Low-Code</span>
+            <span class="skill-pill">IoT</span>
+            <span class="skill-pill" data-de="Software-Architektur" data-en="Software Architecture">Software-Architektur</span>
+            <span class="skill-pill" data-de="3D-Modellierung" data-en="3D Modeling">3D-Modellierung</span>
           </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Language Bars -->
+    <!-- Language Bars
+         TODO(Ole): Stufen noch aktuell? (Englisch C1, Französisch B1, Spanisch Anfänger) Die Balkenlängen
+         (data-pct 100/85/50/15) sind grobe Schätzungen aus den Stufen, bitte mitprüfen. -->
     <div class="lang-bars-card">
       <div class="lang-bars-inner">
         <div class="lang-bars-title"
@@ -387,9 +576,36 @@
       <div>
         <div class="tl-block-label">// work</div>
 
-        <!-- ASML -->
+        <!-- Freshfields (featured)
+             TODO(Ole): Startdatum, Stundenumfang, ggf. weitere Aufgaben.
+             TODO(Ole): Freigabe/Absprache mit dem Arbeitgeber klären. Texte bewusst allgemein, keine Mandanten-,
+             Projekt- oder internen Toolnamen. Die Namensnennung selbst (cplace, Freshfields) ebenfalls bestätigen. -->
         <div class="tl-item featured">
-          <div class="tl-date">Sep 2025 – Dez 2025</div>
+          <div class="tl-date"><span class="tl-todo" data-de="[Startdatum]" data-en="[start date]">[Startdatum]</span> <span data-de="– heute" data-en="– present">– heute</span></div>
+          <div class="tl-company">Freshfields</div>
+          <div class="tl-role"
+               data-de="// werkstudent legal tech · berlin" data-en="// working student legal tech · berlin">// werkstudent legal tech · berlin</div>
+          <div class="tl-bullets">
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="Low-Code-Entwicklung von Legal-Tools mit cplace" data-en="Low-code development of legal tools with cplace">Low-Code-Entwicklung von Legal-Tools mit cplace</span>
+            </div>
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span data-de="KI-gestützte Workflow-Automatisierung" data-en="AI-assisted workflow automation">KI-gestützte Workflow-Automatisierung</span>
+            </div>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag">cplace</span>
+            <span class="tl-tag">Legal Tech</span>
+            <span class="tl-tag">Low-Code</span>
+            <span class="tl-tag">Berlin</span>
+          </div>
+        </div>
+
+        <!-- ASML -->
+        <div class="tl-item">
+          <div class="tl-date" data-de="Sep 2025 – Dez 2025" data-en="Sep 2025 – Dec 2025">Sep 2025 – Dez 2025</div>
           <div class="tl-company">ASML</div>
           <div class="tl-role"
                data-de="// software engineering intern" data-en="// software engineering intern">// software engineering intern</div>
@@ -442,25 +658,52 @@
       <div>
         <div class="tl-block-label">// education</div>
 
-        <!-- HTW Berlin -->
+        <!-- HU Berlin (featured)
+             TODO(Ole): Schwerpunkt/Vertiefung formulieren, so wie du es öffentlich sagen willst.
+             TODO(Ole): Startdatum Okt 2026 bestätigen. -->
         <div class="tl-item featured">
           <div class="tl-date"
-               data-de="Okt 2023 – heute" data-en="Oct 2023 – present">Okt 2023 – heute</div>
-          <div class="tl-company">HTW Berlin</div>
-          <div class="tl-role">// b.sc. medieninformatik</div>
+               data-de="Okt 2026 – heute" data-en="Oct 2026 – present">Okt 2026 – heute</div>
+          <div class="tl-company" data-de="Humboldt-Universität zu Berlin" data-en="Humboldt University of Berlin">Humboldt-Universität zu Berlin</div>
+          <div class="tl-role"
+               data-de="// m.sc. informatik" data-en="// m.sc. computer science">// m.sc. informatik</div>
           <div class="tl-bullets">
             <div class="tl-bullet">
               <span class="tl-arrow">→</span>
-              <span data-de="Notendurchschnitt 1,15" data-en="GPA 1.15">Notendurchschnitt 1,15</span>
+              <span data-de="Schwerpunkt Machine Learning" data-en="Focus on machine learning">Schwerpunkt Machine Learning</span>
+            </div>
+          </div>
+          <div class="tl-tags">
+            <span class="tl-tag" data-de="Machine Learning" data-en="Machine Learning">Machine Learning</span>
+            <span class="tl-tag">Berlin</span>
+          </div>
+        </div>
+
+        <!-- HTW Berlin
+             TODO(Ole): Abschlussdatum (Kolloquium steht an), finale Note (erst nach Bewertung), Studiengang exakt
+             wie im Zeugnis benennen (Medieninformatik / Internationale Medieninformatik). -->
+        <div class="tl-item">
+          <div class="tl-date"><span data-de="Okt 2023 –" data-en="Oct 2023 –">Okt 2023 –</span> <span class="tl-todo" data-de="[Abschlussdatum]" data-en="[graduation date]">[Abschlussdatum]</span></div>
+          <div class="tl-company">HTW Berlin</div>
+          <div class="tl-role"
+               data-de="// b.sc. medieninformatik" data-en="// b.sc. media informatics">// b.sc. medieninformatik</div>
+          <div class="tl-bullets">
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span><span data-de="Bachelorarbeit:" data-en="Bachelor thesis:">Bachelorarbeit:</span> <a class="tl-link" href="#thesis"
+                    data-de="CLIP-basiertes Text-zu-Video-Retrieval" data-en="CLIP-based text-to-video retrieval">CLIP-basiertes Text-zu-Video-Retrieval</a></span>
             </div>
             <div class="tl-bullet">
               <span class="tl-arrow">→</span>
               <span data-de="Schwerpunkte: Web-Entwicklung, Machine Learning, Software-Entwicklung" data-en="Focus: web development, machine learning, software development">Schwerpunkte: Web-Entwicklung, Machine Learning, Software-Entwicklung</span>
             </div>
+            <div class="tl-bullet">
+              <span class="tl-arrow">→</span>
+              <span class="tl-todo" data-de="Note: [folgt nach Bewertung]" data-en="Grade: [pending review]">Note: [folgt nach Bewertung]</span>
+            </div>
           </div>
           <div class="tl-tags">
-            <span class="tl-tag">GPA 1.15</span>
-            <span class="tl-tag" data-de="Sep 2026" data-en="Sep 2026">Sep 2026</span>
+            <span class="tl-tag">Berlin</span>
           </div>
         </div>
 
@@ -499,10 +742,12 @@
     <div class="contact-eyebrow">// get in touch</div>
     <h2 class="contact-heading"
         data-de="Let's connect." data-en="Let's connect.">Let's connect.</h2>
+    <!-- TODO(Ole): Verfügbarkeit noch korrekt? Bewusst vorsichtig: keine "Werkstudentenstellen" mehr, weil du gerade
+         eine hast. Soll hier etwas Konkretes stehen (Praktikum, Thesis-Betreuung, Projekte)? -->
     <p class="contact-sub"
-       data-de="Offen für Projekte, Werkstudentenstellen und interessante Zusammenarbeiten. Gerne per Mail oder LinkedIn."
-       data-en="Open for projects, working student positions and interesting collaborations. Feel free to reach out via email or LinkedIn.">
-      Offen für Projekte, Werkstudentenstellen und interessante Zusammenarbeiten. Gerne per Mail oder LinkedIn.
+       data-de="Ich freue mich über spannende Projekte, Ideen und ein Gespräch über ML, Retrieval oder Legal Tech. Am besten per Mail oder LinkedIn."
+       data-en="I enjoy interesting projects, ideas and a chat about ML, retrieval or legal tech. Email or LinkedIn works best.">
+      Ich freue mich über spannende Projekte, Ideen und ein Gespräch über ML, Retrieval oder Legal Tech. Am besten per Mail oder LinkedIn.
     </p>
     <div class="contact-btn-wrap">
       <a href="mailto:ole.marwede@gmail.com" class="btn-primary">$ ./contact.sh</a>
@@ -530,7 +775,9 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 <script src="js/terminal.js"></script>
+<script src="js/terminal-shell.js"></script>
 <script src="js/animations.js"></script>
+<script src="js/thesis.js"></script>
 <script src="js/main.js"></script>
 
 </body>

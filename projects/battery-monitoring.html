@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battery-Monitoring — Ole Marwede</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='70' font-family='monospace'>om.</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-prompt">
+    <span class="p-name">om</span><span class="p-dot">.</span>
+    <span class="p-path">&nbsp;~/portfolio</span>
+    <span class="p-dollar">&nbsp;$</span>
+  </div>
+  <div class="nav-right">
+    <a href="../index.html#thesis"   class="nav-link">./thesis</a>
+    <a href="../index.html#projects" class="nav-link">./projects</a>
+    <a href="../index.html#skills"   class="nav-link">./skills</a>
+    <a href="../index.html#experience" class="nav-link">./experience</a>
+    <a href="../index.html#contact"  class="nav-link">./contact</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="de">DE</button>
+      <button class="lang-btn"        data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!--
+  TODO(Ole), Sammelliste für diese Seite:
+  - Finale Methodik von K_ML bestätigen (Isolation Forest? LSTM-Autoencoder? GradientBoosting/RF für RUL?) und nur das nennen, was wirklich umgesetzt wurde
+  - Betreuer (Prof. Severin / Prof. Huhn) namentlich nennen okay?
+  - Welche Teile des Stacks stammen von dir, welche vom Team? Teamgröße, Zeitraum, Uni
+  - Metriken/Ergebnisse, Link zu Repo oder Bericht, falls vorhanden
+-->
+
+<div class="detail-page">
+
+  <div class="detail-hero">
+    <a href="../index.html#projects" class="detail-back">← <span data-de="Zurück zu Projekten" data-en="Back to Projects">Zurück zu Projekten</span></a>
+    <div class="detail-tag"
+         data-de="Uni-Teamprojekt" data-en="University Team Project">Uni-Teamprojekt</div>
+    <h1 class="detail-title">Battery-Monitoring</h1>
+    <div class="detail-meta">
+      <span style="font-family:var(--font-mono);font-size:11px;color:var(--green)">// predictive maintenance · IoT · machine learning</span>
+    </div>
+    <div class="detail-tech">
+      <div class="tech-item"><span class="tech-dot" style="background:#3572A5"></span><span class="tech-label">Python</span></div>
+      <div class="tech-item"><span class="tech-dot" style="background:#f89939"></span><span class="tech-label">scikit-learn</span></div>
+      <div class="tech-item"><span class="tech-dot" style="background:#336791"></span><span class="tech-label">PostgreSQL</span></div>
+      <div class="tech-item"><span class="tech-dot" style="background:#2496ed"></span><span class="tech-label">Docker</span></div>
+      <div class="tech-item"><span class="tech-dot" style="background:#f46800"></span><span class="tech-label">Grafana</span></div>
+      <div class="tech-item"><span class="tech-dot" style="background:#c23b3b"></span><span class="tech-label">Node-RED</span></div>
+      <div class="tech-item"><span class="tech-dot" style="background:#a855c7"></span><span class="tech-label">MQTT</span></div>
+      <div class="tech-item"><span class="tech-dot" style="background:#e7352c"></span><span class="tech-label">ESP32</span></div>
+      <div class="tech-item"><span class="tech-dot" style="background:#c51a4a"></span><span class="tech-label">Raspberry Pi</span></div>
+    </div>
+    <div class="detail-links">
+      <!-- TODO(Ole): Repo- oder Berichtslink setzen, falls vorhanden. Dann "is-soon" und aria-disabled entfernen. -->
+      <span class="btn-primary is-soon" aria-disabled="true"><span>$ ./github</span> <span class="soon-note" data-de="· folgt" data-en="· soon">· folgt</span></span>
+    </div>
+  </div>
+
+  <div class="detail-body">
+    <div class="detail-desc">
+      <h3 data-de="Über das Projekt" data-en="About the Project">Über das Projekt</h3>
+      <!-- TODO(Ole): Okay, die Betreuer namentlich zu nennen? Sonst den Satz kürzen. -->
+      <p data-de="Teamprojekt an der Uni für ein Batteriemonitoring von Fahrzeugflotten im IoT-Umfeld, betreut von Prof. Severin und Prof. Huhn."
+         data-en="University team project for battery monitoring of vehicle fleets in an IoT setting, supervised by Prof. Severin and Prof. Huhn.">Teamprojekt an der Uni für ein Batteriemonitoring von Fahrzeugflotten im IoT-Umfeld, betreut von Prof. Severin und Prof. Huhn.</p>
+      <h3 data-de="Mein Beitrag: K_ML" data-en="My contribution: K_ML">Mein Beitrag: K_ML</h3>
+      <p data-de="Ich habe die ML-Komponente „K_ML“ übernommen. Sie liefert drei Dinge:"
+         data-en="I took on the ML component “K_ML”. It delivers three things:">Ich habe die ML-Komponente „K_ML“ übernommen. Sie liefert drei Dinge:</p>
+      <ul>
+        <li data-de="Health Score von 0 bis 100 als schnelle Aussage zum Batteriezustand" data-en="Health score from 0 to 100 as a quick statement about battery condition">Health Score von 0 bis 100 als schnelle Aussage zum Batteriezustand</li>
+        <li data-de="Schätzung der Restlebensdauer (RUL, Remaining Useful Life)" data-en="Estimate of the remaining useful life (RUL)">Schätzung der Restlebensdauer (RUL, Remaining Useful Life)</li>
+        <li data-de="Anomalieerkennung auf den Messdaten" data-en="Anomaly detection on the measurement data">Anomalieerkennung auf den Messdaten</li>
+      </ul>
+      <p data-de="Grundlage sind reale Felddaten: mehrere Batterien, über mehrere Monate gemessen."
+         data-en="It is built on real field data: several batteries, measured over several months.">Grundlage sind reale Felddaten: mehrere Batterien, über mehrere Monate gemessen.</p>
+
+      <!-- TODO(Ole): Finale Methodik bestätigen (Isolation Forest? LSTM-Autoencoder? GradientBoosting/RF für RUL?) und nur nennen, was wirklich umgesetzt wurde. -->
+      <p class="th-todo" data-de="// methodik folgt: welche verfahren genau umgesetzt wurden"
+         data-en="// methodology to follow: which methods were actually implemented">// methodik folgt: welche verfahren genau umgesetzt wurden</p>
+
+      <!-- TODO(Ole): Abschnitt "Stack im Projekt" erst wieder aufnehmen, wenn klar ist, welche Teile des Stacks von dir stammen, welche vom Team und wofür sie im Projekt da sind (die Tech-Dots oben nennen den Stack bereits). -->
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-de]').forEach(el => {
+      const val = el.dataset[lang];
+      if (val !== undefined) el.textContent = val;
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    try { localStorage.setItem('lang', lang); } catch (e) { /* ignore */ }
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    let saved = 'de';
+    try { saved = localStorage.getItem('lang') || 'de'; } catch (e) { /* ignore */ }
+    setLang(saved === 'en' ? 'en' : 'de');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLang(btn.dataset.lang));
+    });
+  });
+</script>
+</body>
+</html>

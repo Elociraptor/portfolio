@@ -19,6 +19,7 @@
     <span class="p-dollar">&nbsp;$</span>
   </div>
   <div class="nav-right">
+    <a href="../index.html#thesis"   class="nav-link">./thesis</a>
     <a href="../index.html#projects" class="nav-link">./projects</a>
     <a href="../index.html#skills"   class="nav-link">./skills</a>
     <a href="../index.html#experience" class="nav-link">./experience</a>
@@ -45,9 +46,8 @@
       <div class="tech-item"><span class="tech-dot" style="background:#5c9bd1"></span><span class="tech-label">OpenCV</span></div>
       <div class="tech-item"><span class="tech-dot" style="background:#4dabcf"></span><span class="tech-label">NumPy</span></div>
     </div>
-    <div class="detail-links">
-      <a href="https://github.com/Elociraptor" target="_blank" rel="noopener" class="btn-primary">$ ./github ↗</a>
-    </div>
+    <!-- TODO(Ole): Repo-URL für Bildverarbeitung als <a class="btn-primary"> in .detail-links ergänzen (der alte Link zeigte nur auf das GitHub-Profil und wurde entfernt). -->
+    <!-- TODO(Ole): Tech-Stack stimmt nicht überein: Detailseite nennt Python/OpenCV/NumPy, die Projektkarte auf der Startseite nennt Java. Bitte klären. -->
   </div>
 
   <div class="detail-body">
@@ -55,7 +55,7 @@
       <h3 data-de="Über das Projekt" data-en="About the Project">Über das Projekt</h3>
       <p data-de="Bildverarbeitungsaufgaben im Rahmen des Medieninformatik-Studiums an der HTW Berlin. Implementierung und Evaluation klassischer grundlegender Bildverarbeitungs Algorithmen in Java."
          data-en="Image processing exercises as part of the media informatics studies at HTW Berlin. Implementation and evaluation of classical computer vision algorithms in Java.">
-        Bildverarbeitungsaufgaben im Rahmen des Medieninformatik-Studiums an der HTW Berlin. Implementierung und Evaluation klassischer grundlegender Bildverarbeitungs Algorithmen in Java..
+        Bildverarbeitungsaufgaben im Rahmen des Medieninformatik-Studiums an der HTW Berlin. Implementierung und Evaluation klassischer grundlegender Bildverarbeitungs Algorithmen in Java.
       </p>
 
       <h3 data-de="Was ich implementiert habe" data-en="What I implemented">Was ich implementiert habe</h3>
@@ -90,10 +90,12 @@
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
-    localStorage.setItem('lang', lang);
+    try { localStorage.setItem('lang', lang); } catch (e) { /* ignore */ }
   }
   document.addEventListener('DOMContentLoaded', () => {
-    setLang(localStorage.getItem('lang') || 'de');
+    let saved = 'de';
+    try { saved = localStorage.getItem('lang') || 'de'; } catch (e) { /* ignore */ }
+    setLang(saved === 'en' ? 'en' : 'de');
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => setLang(btn.dataset.lang));
     });

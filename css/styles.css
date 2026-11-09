@@ -1347,6 +1347,7 @@ footer {
 .alpha-chart .ax-ticks text { fill: var(--text-dim); font-family: var(--font-mono); font-size: 11px; }
 .alpha-chart .ax-title { fill: var(--text-dim); font-family: var(--font-mono); font-size: 11px; font-weight: 700; }
 .alpha-chart .ax-cursor { stroke: var(--text-dim); stroke-width: 1; stroke-dasharray: 2 4; }
+.alpha-chart .ax-zero { stroke: var(--text-dim); stroke-width: 1; }
 .alpha-chart .line { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
 .alpha-chart .line-id  { stroke: var(--green); }
 .alpha-chart .line-ood { stroke: var(--text); stroke-dasharray: 6 5; }
@@ -1499,6 +1500,13 @@ footer {
 .alpha-table tbody th { color: var(--text); font-weight: 500; }
 .alpha-table tr.is-current th, .alpha-table tr.is-current td { background: var(--green-dim); }
 .alpha-table td.is-opt { color: var(--green); font-weight: 700; }
+
+.alpha-caption { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin: 0 0 10px; line-height: 1.6; }
+
+/* Screenshot auf der Detailseite (ungeschnitten, im Originalformat) */
+.th-figure { margin: 16px 0 0; max-width: 960px; }
+.th-figure img { display: block; width: 100%; height: auto; border: 1px solid var(--border-2); border-radius: 12px; }
+.th-figure figcaption { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: 8px; line-height: 1.6; }
 
 /* ── Thesis: Detailseite ───────────────────────────────────── */
 .detail-title.th-title {

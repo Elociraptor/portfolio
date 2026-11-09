@@ -9,28 +9,36 @@
      </div>
    Optional: data-table="true" rendert zusätzlich eine Wertetabelle.
 
-   ── Erwartetes Datenformat: data/alpha_sweep.json ──────────
-   TODO(Ole): echte Werte aus den Auswertungen als JSON liefern.
-   Die Datei existiert absichtlich (noch) nicht. Ohne Datei bleibt es
-   beim "Daten folgen"-Zustand, es werden keine Kurven erfunden.
+   ── Datenformat: data/alpha_sweep.json ─────────────────────
+   Ohne Datei (oder ohne Webserver, z. B. file://) bleibt der
+   "nicht verfügbar"-Zustand stehen, es werden keine Kurven erfunden.
 
    {
-     "msrvtt":   [ { "alpha": 0.0, "r1": 0, "r5": 0, "r10": 0 }, … ],
-     "charades": [ { "alpha": 0.0, "r1": 0, "r5": 0, "r10": 0 }, … ]
+     "meta": { "caption": { "de": "…", "en": "…" } },      (optional)
+     "sets": [
+       { "id": "partial", "label": { "de": "…", "en": "…" },
+         "msrvtt":   [ { "alpha": 0.0, "r1": 0.2, "r5": 0.4, "r10": 0.5 }, … ],
+         "charades": [ … ] },
+       { "id": "full", … }
+     ]
    }
 
-   (Die Nullen oben sind nur Platzhalter für die Struktur.)
+   Ein "set" ist eine Fine-Tuning-Variante. Bei mehreren Sets erscheint
+   eine Auswahl. Mit data-simple="true" am Explorer-Element wird nur das
+   erste Set und nur R@1 gezeigt (die JSON bleibt vollständig). Die ältere Form ohne "sets" (nur { "msrvtt": […],
+   "charades": […] } auf oberster Ebene) wird als ein einzelnes Set gelesen.
 
    - "msrvtt" = In-Domain, "charades" = Out-of-Distribution.
    - alpha: Zahl von 0 bis 1 (in der Arbeit 0.0 bis 1.0 in 0.1er-Schritten).
-     Beide Reihen müssen nicht dieselben α-Werte haben; Lücken werden
-     als Lücken gezeichnet.
+     α = 0 ist das Zero-Shot-Modell, α = 1 das vollständig fine-getunte
+     (die Daten bestätigen das: bei α = 0 sind alle Varianten identisch).
+     Reihen müssen nicht dieselben α-Werte haben; Lücken werden als
+     Lücken gezeichnet.
    - r1 / r5 / r10: Recall@K als Zahl. Liegen alle Werte <= 1, werden sie
      als Anteil (0–1) gelesen und als Prozent angezeigt, sonst als Prozent.
      Nicht vorhandene Metriken dürfen fehlen; die Metrik-Buttons richten
      sich nach den Daten.
-   - TODO(Ole): Bestätigen, dass α = 0 Zero-Shot und α = 1 vollständig
-     fine-getuned bedeutet (so ist es in den Texten angenommen).
+   - meta.caption: eine Zeile unter der Legende (Checkpoint, Sampling, Queries).
    ============================================================ */
 
 (function () {
@@ -48,34 +56,32 @@
   /* ── Texte (zweisprachig) ──────────────────────────────────── */
   const T = {
     de: {
-      id: 'In-Domain · MSR-VTT',
-      ood: 'Out-of-Distribution · Charades',
-      slider: 'Interpolationsfaktor α',
+      id: 'Bekannte Daten · MSR-VTT',
+      ood: 'Fremde Daten · Charades',
+      slider: 'Fine-Tuning-Anteil α (0 = Original, 1 = voll angepasst)',
       metric: 'Metrik',
-      optimum: 'Optimum bei α =',
-      atOptimum: 'genau am Optimum',
-      fromOptimum: 'zum Optimum',
+      variant: 'Fine-Tuning',
+      atOptimum: 'bester Wert',
+      best: (v, a) => `bester Wert: ${v} bei α = ${a}`,
       noValue: 'keine Messung bei diesem α',
-      pp: 'Pp',
-      chart: (m) => `Liniendiagramm: ${m} über α für In-Domain (MSR-VTT) und Out-of-Distribution (Charades)`,
+      chart: (m) => `Liniendiagramm: Veränderung von ${m} gegenüber dem Original-Modell (α = 0) über α, für bekannte Daten (MSR-VTT) und fremde Daten (Charades)`,
+      yTitle: (m) => `${m}-Gewinn ggü. Original (Pp)`,
       table: 'Werte je α',
-      tableCaption: (m) => `Messwerte für ${m} je α`,
-      sliderHint: 'Regler oder Pfeiltasten benutzen, oder im Diagramm klicken und ziehen.',
+      tableCaption: (m, v) => `Messwerte für ${m} je α${v ? ' · ' + v : ''}`,
     },
     en: {
-      id: 'In-domain · MSR-VTT',
-      ood: 'Out-of-distribution · Charades',
-      slider: 'Interpolation factor α',
+      id: 'Familiar data · MSR-VTT',
+      ood: 'Unseen data · Charades',
+      slider: 'Fine-tuning share α (0 = original, 1 = fully adapted)',
       metric: 'Metric',
-      optimum: 'Optimum at α =',
-      atOptimum: 'right at the optimum',
-      fromOptimum: 'from optimum',
+      variant: 'Fine-tuning',
+      atOptimum: 'best value',
+      best: (v, a) => `best value: ${v} at α = ${a}`,
       noValue: 'no measurement at this α',
-      pp: 'pp',
-      chart: (m) => `Line chart: ${m} over α for in-domain (MSR-VTT) and out-of-distribution (Charades)`,
+      chart: (m) => `Line chart: change in ${m} relative to the original model (α = 0) over α, for familiar data (MSR-VTT) and unseen data (Charades)`,
+      yTitle: (m) => `${m} gain vs. original model (pp)`,
       table: 'Values per α',
-      tableCaption: (m) => `Measured ${m} per α`,
-      sliderHint: 'Use the slider or arrow keys, or click and drag in the chart.',
+      tableCaption: (m, v) => `Measured ${m} per α${v ? ' · ' + v : ''}`,
     },
   };
 
@@ -94,7 +100,7 @@
           })
           .then(normalize)
           .catch((err) => {
-            // Erwartet, solange die Datei fehlt (oder bei file://). Placeholder bleibt.
+            // Erwartet bei file:// oder fehlender Datei. Der Hinweis-Zustand bleibt stehen.
             console.info('[thesis] α-Daten nicht verfügbar:', err.message);
             return null;
           })
@@ -106,44 +112,52 @@
   const num = (v) => (typeof v === 'number' && isFinite(v) ? v : null);
   const roundA = (a) => Math.round(a * 1e4) / 1e4;
 
-  /* Liefert { alphas[], rows: {msrvtt: Map, charades: Map}, metrics[], scale, digits } oder null. */
+  /* Liefert { alphas[], sets: [{id, label, rows: {msrvtt: Map, charades: Map}}], metrics[], scale, digits, caption } oder null. */
   function normalize(raw) {
     if (!raw || typeof raw !== 'object') return null;
 
-    const rows = {};
+    // Ältere Form ohne "sets" = ein einzelnes Set.
+    const rawSets = Array.isArray(raw.sets) && raw.sets.length ? raw.sets : [raw];
     const alphaSet = new Set();
-    let anyRows = false;
+    const sets = [];
 
-    for (const s of SERIES) {
-      const m = new Map();
-      const list = Array.isArray(raw[s.key]) ? raw[s.key] : [];
-      for (const r of list) {
-        const a = r && num(r.alpha);
-        if (a === null || a < 0 || a > 1) continue;
-        const entry = {};
-        let any = false;
-        for (const k of METRICS) {
-          entry[k] = num(r[k]);
-          if (entry[k] !== null) any = true;
+    rawSets.forEach((rs, si) => {
+      if (!rs || typeof rs !== 'object') return;
+      const rows = {};
+      let anyRows = false;
+      for (const s of SERIES) {
+        const m = new Map();
+        const list = Array.isArray(rs[s.key]) ? rs[s.key] : [];
+        for (const r of list) {
+          const a = r && num(r.alpha);
+          if (a === null || a < 0 || a > 1) continue;
+          const entry = {};
+          let any = false;
+          for (const k of METRICS) {
+            entry[k] = num(r[k]);
+            if (entry[k] !== null) any = true;
+          }
+          if (!any) continue;
+          m.set(roundA(a), entry);
+          alphaSet.add(roundA(a));
+          anyRows = true;
         }
-        if (!any) continue;
-        m.set(roundA(a), entry);
-        alphaSet.add(roundA(a));
-        anyRows = true;
+        rows[s.key] = m;
       }
-      rows[s.key] = m;
-    }
-    if (!anyRows) return null;
+      if (anyRows) sets.push({ id: String(rs.id || 'set' + si), label: rs.label || null, rows });
+    });
+    if (!sets.length) return null;
 
     const alphas = [...alphaSet].sort((a, b) => a - b);
+    const allRows = (s) => sets.flatMap((st) => [...st.rows[s.key].values()]);
     const metrics = METRICS.filter((k) =>
-      SERIES.some((s) => [...rows[s.key].values()].some((e) => e[k] !== null))
+      SERIES.some((s) => allRows(s).some((e) => e[k] !== null))
     );
     if (!metrics.length) return null;
 
     let max = -Infinity;
     for (const s of SERIES) {
-      for (const e of rows[s.key].values()) {
+      for (const e of allRows(s)) {
         for (const k of metrics) if (e[k] !== null && e[k] > max) max = e[k];
       }
     }
@@ -154,7 +168,15 @@
       ...alphas.map((a) => (String(a).split('.')[1] || '').length)
     );
 
-    return { alphas, rows, metrics, scale, digits };
+    const caption = raw.meta && raw.meta.caption ? raw.meta.caption : null;
+    return { alphas, sets, metrics, scale, digits, caption };
+  }
+
+  /* Text aus { de, en } (oder einfachem String) in der aktuellen Sprache. */
+  function loc(v) {
+    if (!v) return '';
+    if (typeof v === 'string') return v;
+    return v[getLang()] || v.de || v.en || '';
   }
 
   /* ── Hilfsfunktionen ───────────────────────────────────────── */
@@ -178,6 +200,11 @@
   function fmtPct(v) {
     return getLang() === 'de' ? fmt(v, 1) + ' %' : fmt(v, 1) + '%';
   }
+  function fmtSigned(v, digits) {
+    const r = Number(v.toFixed(digits));
+    if (r === 0) return fmt(0, digits);
+    return (r < 0 ? '−' : '+') + fmt(Math.abs(r), digits);
+  }
   function niceStep(range, ticks) {
     const raw = range / ticks;
     const mag = Math.pow(10, Math.floor(Math.log10(raw)));
@@ -195,9 +222,20 @@
     const empty = root.querySelector('.alpha-empty');
     const showTable = root.dataset.table === 'true';
 
+    // Einfacher Modus (data-simple="true"): nur die erste Variante und nur R@1, ohne Auswahl-Buttons.
+    // Die Daten in der JSON bleiben vollständig; ohne das Attribut erscheinen Metrik- und Varianten-Auswahl wieder.
+    const simple = root.dataset.simple === 'true';
+    if (simple) {
+      data = Object.assign({}, data, {
+        sets: data.sets.slice(0, 1),
+        metrics: data.metrics.includes('r1') ? ['r1'] : data.metrics.slice(0, 1),
+      });
+    }
+
     const state = {
       idx: Math.min(data.alphas.length - 1, Math.round((data.alphas.length - 1) / 2)),
       metric: data.metrics.includes('r1') ? 'r1' : data.metrics[0],
+      set: 0,
     };
     // Start am Optimum der In-Domain-Reihe, falls vorhanden (kein Spoiler nötig, es sind ja die echten Daten).
     const initOpt = optimum('msrvtt');
@@ -214,6 +252,9 @@
       item.appendChild(sw);
       return h('span', 'alpha-legend-label', item);
     });
+
+    /* Kurzbeschreibung der Messung (Checkpoint, Sampling, Queries) */
+    const captionEl = data.caption ? h('p', 'alpha-caption', live) : null;
 
     /* Diagramm */
     const W = 640, H = 320;
@@ -260,13 +301,30 @@
     });
     metricGroup.setAttribute('aria-labelledby', id + '-metric-label');
     metricLabel.id = id + '-metric-label';
+    if (data.metrics.length < 2) metricGroup.style.display = 'none'; // nur eine Metrik: keine Auswahl nötig
+
+    /* Auswahl der Fine-Tuning-Variante (nur bei mehr als einem Set) */
+    let setLabelEl = null;
+    let setBtns = [];
+    if (data.sets.length > 1) {
+      const setGroup = h('div', 'alpha-metrics', controls);
+      setGroup.setAttribute('role', 'group');
+      setLabelEl = h('span', 'alpha-metrics-label', setGroup);
+      setLabelEl.id = id + '-set-label';
+      setGroup.setAttribute('aria-labelledby', setLabelEl.id);
+      setBtns = data.sets.map((st, i) => {
+        const b = h('button', 'alpha-metric-btn', setGroup);
+        b.type = 'button';
+        b.addEventListener('click', () => { state.set = i; update(); });
+        return b;
+      });
+    }
 
     /* Readout (aria-live) */
     const readout = h('div', 'alpha-readout', live);
     readout.setAttribute('aria-live', 'polite');
     readout.setAttribute('aria-atomic', 'true');
 
-    const hint = h('p', 'alpha-hint', live);
 
     /* Tabelle (optional) */
     let tableWrap = null, table = null, tableCaption = null, tableHead = null, tableBody = null;
@@ -280,7 +338,7 @@
 
     /* ── Logik ── */
     function value(seriesKey, idx, metric) {
-      const row = data.rows[seriesKey].get(data.alphas[idx]);
+      const row = data.sets[state.set].rows[seriesKey].get(data.alphas[idx]);
       return row && row[metric] !== null ? row[metric] * data.scale : null;
     }
     function optimum(seriesKey, metric) {
@@ -293,6 +351,23 @@
       return best;
     }
 
+    /* Das Diagramm zeigt die Veränderung gegenüber dem Zero-Shot-Modell (erster Messpunkt, α = 0)
+       in Prozentpunkten. So sind In-Domain und Out-of-Distribution vergleichbar, obwohl ihre
+       absoluten Werte weit auseinanderliegen. Readout und Tabelle zeigen weiter die Absolutwerte. */
+    function baseline(setIdx, seriesKey, metric) {
+      const rows = data.sets[setIdx].rows[seriesKey];
+      for (const a of data.alphas) {
+        const r = rows.get(a);
+        if (r && r[metric] !== null) return r[metric] * data.scale;
+      }
+      return null;
+    }
+    function delta(setIdx, seriesKey, idx, metric) {
+      const row = data.sets[setIdx].rows[seriesKey].get(data.alphas[idx]);
+      const b = baseline(setIdx, seriesKey, metric);
+      return row && row[metric] !== null && b !== null ? row[metric] * data.scale - b : null;
+    }
+
     function drawChart() {
       const lang = getLang();
       const t = T[lang];
@@ -300,11 +375,12 @@
       [...svg.childNodes].forEach((n) => { if (n !== svgTitle) svg.removeChild(n); });
       svgTitle.textContent = t.chart(METRIC_LABEL[state.metric]);
 
-      const all = [];
-      SERIES.forEach((s) => data.alphas.forEach((_, i) => {
-        const v = value(s.key, i, state.metric);
+      // y-Achse über alle Sets bestimmen, damit sie beim Umschalten der Variante stabil bleibt
+      const all = [0]; // 0 (Zero-Shot) liegt immer im Bild
+      data.sets.forEach((_, si) => SERIES.forEach((s) => data.alphas.forEach((a, i) => {
+        const v = delta(si, s.key, i, state.metric);
         if (v !== null) all.push(v);
-      }));
+      })));
       let lo = Math.min(...all), hi = Math.max(...all);
       if (hi - lo < 1e-9) { lo -= 1; hi += 1; }
       const step = niceStep(hi - lo, 4);
@@ -322,8 +398,10 @@
       for (let v = yMin; v <= yMax + step / 1000; v += step) {
         el('line', { x1: M.l, y1: Y(v), x2: W - M.r, y2: Y(v) }, gGrid);
         const tx = el('text', { x: M.l - 8, y: Y(v) + 4, 'text-anchor': 'end' }, gYT);
-        tx.textContent = fmt(v, step < 1 ? Math.max(1, -Math.floor(Math.log10(step))) : 0);
+        tx.textContent = fmtSigned(v, step < 1 ? Math.max(1, -Math.floor(Math.log10(step))) : 0);
       }
+      /* Nulllinie = Zero-Shot */
+      el('line', { class: 'ax-zero', x1: M.l, y1: Y(0), x2: W - M.r, y2: Y(0) }, svg);
       /* x-Achse */
       el('line', { class: 'ax-axis', x1: M.l, y1: H - M.b, x2: W - M.r, y2: H - M.b }, svg);
       const gXT = el('g', { class: 'ax-ticks ax-ticks-x' }, svg);
@@ -337,7 +415,7 @@
       const ax = el('text', { class: 'ax-title', x: (M.l + W - M.r) / 2, y: H - 6, 'text-anchor': 'middle' }, svg);
       ax.textContent = 'α';
       const ay = el('text', { class: 'ax-title', x: M.l, y: 12, 'text-anchor': 'start' }, svg);
-      ay.textContent = METRIC_LABEL[state.metric] + ' (%)';
+      ay.textContent = t.yTitle(METRIC_LABEL[state.metric]);
 
       /* Cursor */
       const cx = X(data.alphas[state.idx]);
@@ -346,7 +424,7 @@
       /* Kurven, Optima, aktuelle Punkte */
       SERIES.forEach((s) => {
         const pts = data.alphas.map((a, i) => {
-          const v = value(s.key, i, state.metric);
+          const v = delta(state.set, s.key, i, state.metric);
           return v === null ? null : { x: X(a), y: Y(v), i };
         });
         // Segmente (Lücken unterbrechen die Linie)
@@ -388,16 +466,12 @@
         const note = h('span', 'alpha-readout-note', row);
         if (v === null) {
           note.textContent = t.noValue;
-        } else if (oi === state.idx) {
+        } else if (oi === state.idx || (oi !== null && Math.abs(v - value(s.key, oi, state.metric)) < 1e-9)) {
+          // auch bei Gleichstand mit dem Optimum
           note.textContent = t.atOptimum;
           row.classList.add('is-opt');
         } else if (oi !== null) {
-          const ov = value(s.key, oi, state.metric);
-          const diff = v - ov;
-          const sign = diff < 0 ? '−' : '+';
-          note.textContent =
-            sign + fmt(Math.abs(diff), 1) + ' ' + t.pp + ' ' + t.fromOptimum +
-            ' (' + t.optimum + ' ' + fmt(data.alphas[oi], data.digits) + ')';
+          note.textContent = t.best(fmtPct(value(s.key, oi, state.metric)), fmt(data.alphas[oi], data.digits));
         }
       });
     }
@@ -405,7 +479,10 @@
     function drawTable() {
       if (!table) return;
       const t = T[getLang()];
-      tableCaption.textContent = t.tableCaption(METRIC_LABEL[state.metric]);
+      tableCaption.textContent = t.tableCaption(
+        METRIC_LABEL[state.metric],
+        data.sets.length > 1 ? loc(data.sets[state.set].label) : ''
+      );
       tableHead.textContent = '';
       tableBody.textContent = '';
       const hr = h('tr', null, tableHead);
@@ -417,7 +494,9 @@
         const th = h('th', null, tr, fmt(a, data.digits)); th.scope = 'row';
         SERIES.forEach((s, si) => {
           const v = value(s.key, i, state.metric);
-          const td = h('td', opt[si] === i ? 'is-opt' : null, tr, v === null ? '—' : fmtPct(v));
+          const isOpt = v !== null && opt[si] !== null &&
+            Math.abs(v - value(s.key, opt[si], state.metric)) < 1e-9; // Gleichstand zählt mit
+          const td = h('td', isOpt ? 'is-opt' : null, tr, v === null ? '—' : fmtPct(v));
           if (i === state.idx) td.setAttribute('aria-current', 'true');
         });
       });
@@ -429,7 +508,13 @@
       legendItems[1].textContent = t.ood;
       sliderLabel.textContent = t.slider;
       metricLabel.textContent = t.metric;
-      hint.textContent = t.sliderHint;
+      if (captionEl) {
+        // Gibt es nur eine Variante, steht sie hier (sonst zeigt die Auswahl, welche aktiv ist).
+        const only = data.sets.length === 1 ? loc(data.sets[0].label) : '';
+        captionEl.textContent = loc(data.caption) + (only ? ' · ' + t.variant + ': ' + only : '');
+      }
+      if (setLabelEl) setLabelEl.textContent = t.variant;
+      setBtns.forEach((b, i) => { b.textContent = loc(data.sets[i].label) || data.sets[i].id; });
     }
 
     function update() {
@@ -438,6 +523,7 @@
       slider.setAttribute('aria-valuetext', 'α = ' + fmt(alpha, data.digits));
       sliderValue.textContent = 'α = ' + fmt(alpha, data.digits);
       metricBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.metric === state.metric)));
+      setBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(i === state.set)));
       applyLabels();
       drawChart();
       drawReadout();

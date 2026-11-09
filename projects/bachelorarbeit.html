@@ -32,27 +32,19 @@
   </div>
 </nav>
 
-<!--
-  TODO(Ole), Sammelliste für diese Seite:
-  - Metriken (R@1 / R@5 / R@10) als Tabelle, finale Note (erst nach Bewertung), Abgabe-/Kolloquiumsdatum
-  - Links zu PDF (nur falls freigegeben), Repo, Slides
-  - Betreuer namentlich nennen okay?
-  - "Grenzen"-Abschnitt gegen die finale Fassung der Arbeit prüfen
-  - Screenshot der Streamlit-App nach images/ legen
--->
 
 <div class="detail-page">
 
   <div class="detail-hero">
     <a href="../index.html#thesis" class="detail-back">← <span data-de="Zurück zur Bachelorarbeit" data-en="Back to the thesis">Zurück zur Bachelorarbeit</span></a>
     <div class="detail-tag" data-de="Bachelorarbeit" data-en="Bachelor thesis">Bachelorarbeit</div>
-    <!-- TODO(Ole): Offizielle englische Titelübersetzung prüfen (EN-Text ist eine Übersetzung). -->
     <h1 class="detail-title th-title"
         data-de="Optimierungsstrategien für CLIP-basierte Text-zu-Video-Retrieval-Systeme"
         data-en="Optimization Strategies for CLIP-Based Text-to-Video Retrieval Systems">Optimierungsstrategien für CLIP-basierte Text-zu-Video-Retrieval-Systeme</h1>
     <div class="detail-meta">
       <span style="font-family:var(--font-mono);font-size:11px;color:var(--green)">// bachelor thesis · 2026</span>
-      <!-- TODO(Ole): Okay, den Betreuer namentlich öffentlich zu nennen? Sonst diese Zeile entfernen. -->
+      <span style="font-family:var(--font-mono);font-size:11px;color:var(--green)"
+            data-de="Note 1,0" data-en="Grade 1.0">Note 1,0</span>
       <span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)"
             data-de="Prof. Dr. Klaus Jung (Erstgutachter) · HTW Berlin"
             data-en="Prof. Dr. Klaus Jung (first examiner) · HTW Berlin">Prof. Dr. Klaus Jung (Erstgutachter) · HTW Berlin</span>
@@ -66,10 +58,8 @@
       <div class="tech-item"><span class="tech-dot" style="background:#ff4b4b"></span><span class="tech-label">Streamlit</span></div>
     </div>
     <div class="detail-links">
-      <!-- TODO(Ole): PDF-Link (nur falls freigegeben) als href setzen, "is-soon" und aria-disabled entfernen. -->
-      <span class="btn-primary is-soon" aria-disabled="true"><span>$ ./read-thesis</span> <span class="soon-note" data-de="· folgt" data-en="· soon">· folgt</span></span>
-      <!-- TODO(Ole): Repo-URL zur Arbeit als href setzen, "is-soon" und aria-disabled entfernen. -->
-      <span class="btn-ghost is-soon" aria-disabled="true"><span>$ ./github</span> <span class="soon-note" data-de="· folgt" data-en="· soon">· folgt</span></span>
+      <a href="https://github.com/Elociraptor/bachelor_thesis_code/blob/main/Optimierungsstrategien%20f%C3%BCr%20CLIP-basierte%20Text-zu-Video-Retrieval-Systeme.pdf" target="_blank" rel="noopener" class="btn-primary">$ ./read-thesis ↗</a>
+      <a href="https://github.com/Elociraptor/bachelor_thesis_code" target="_blank" rel="noopener" class="btn-ghost">$ ./github ↗</a>
     </div>
   </div>
 
@@ -78,8 +68,8 @@
     <!-- 1. Problem & Motivation -->
     <section class="detail-desc th-sec" aria-labelledby="s1">
       <h3 id="s1" data-de="// 01 problem &amp; motivation" data-en="// 01 problem &amp; motivation">// 01 problem &amp; motivation</h3>
-      <p data-de="Known-Item-Search heißt: Du hast eine bestimmte Szene im Kopf, kennst sie vielleicht von früher, und willst sie in einer großen Videosammlung wiederfinden. Genau das wird beim Video Browser Showdown (VBS) unter Zeitdruck getestet. Die Suchanfrage ist dabei Text, gefunden werden soll ein Video."
-         data-en="Known-item search means: you have one specific scene in your head, maybe from a while ago, and want to find it again in a large video collection. That is exactly what the Video Browser Showdown (VBS) tests under time pressure. The query is text, the result should be a video.">Known-Item-Search heißt: Du hast eine bestimmte Szene im Kopf, kennst sie vielleicht von früher, und willst sie in einer großen Videosammlung wiederfinden. Genau das wird beim Video Browser Showdown (VBS) unter Zeitdruck getestet. Die Suchanfrage ist dabei Text, gefunden werden soll ein Video.</p>
+      <p data-de="Known-Item-Search heißt: Du hast eine bestimmte Szene im Kopf, kennst sie vielleicht von früher, und willst sie in einer großen Videosammlung wiederfinden. Genau das wird beim Video Browser Showdown (VBS) unter Zeitdruck getestet. Die Suchanfrage ist dabei Text, gefunden werden soll eine Scene in einem Video."
+         data-en="Known-item search means: you have one specific scene in your head, maybe from a while ago, and want to find it again in a large video collection. That is exactly what the Video Browser Showdown (VBS) tests under time pressure. The query is text, the result should be a scene in a video.">Known-Item-Search heißt: Du hast eine bestimmte Szene im Kopf, kennst sie vielleicht von früher, und willst sie in einer großen Videosammlung wiederfinden. Genau das wird beim Video Browser Showdown (VBS) unter Zeitdruck getestet. Die Suchanfrage ist dabei Text, gefunden werden soll eine Scene in einem Video.</p>
       <p data-de="CLIP bringt Text und Bild in einen gemeinsamen Vektorraum, das ist die Grundlage für solche Systeme. Spannend wird es bei zwei Fragen: Welche Frames eines Videos füttert man dem Modell überhaupt, und wie weit passt man das Modell per Fine-Tuning an, ohne dass es auf fremden Daten schlechter wird? Beides hängt an verschiedenen Stellen der Pipeline, und ich wollte wissen, wie die beiden Stellschrauben zusammenspielen."
          data-en="CLIP puts text and images into one shared vector space, which is the foundation for systems like this. Two questions get interesting: which frames of a video do you feed the model in the first place, and how far do you adapt the model by fine-tuning before it gets worse on data it has not seen? Both sit at different points of the pipeline, and I wanted to know how the two knobs interact.">CLIP bringt Text und Bild in einen gemeinsamen Vektorraum, das ist die Grundlage für solche Systeme. Spannend wird es bei zwei Fragen: Welche Frames eines Videos füttert man dem Modell überhaupt, und wie weit passt man das Modell per Fine-Tuning an, ohne dass es auf fremden Daten schlechter wird? Beides hängt an verschiedenen Stellen der Pipeline, und ich wollte wissen, wie die beiden Stellschrauben zusammenspielen.</p>
     </section>
@@ -93,9 +83,9 @@
          data-en="I compared fixed sampling rates of 2, 1 and 0.5 frames per second, plus shot-based sampling where TransNetV2 detects the cuts in a video.">Verglichen habe ich feste Abtastraten mit 2, 1 und 0,5 Frames pro Sekunde sowie ein shot-basiertes Sampling, bei dem TransNetV2 die Schnittgrenzen im Video findet.</p>
 
       <h4 data-de="Stellschraube 2: WiSE-FT-Interpolation" data-en="Knob 2: WiSE-FT interpolation">Stellschraube 2: WiSE-FT-Interpolation</h4>
-      <p data-de="Statt nur zwischen Zero-Shot und fertig fine-getuntem Modell zu wählen, werden die Gewichte beider linear gemischt. Der Faktor α läuft von 0,0 bis 1,0 in 0,1er-Schritten."
-         data-en="Instead of choosing between zero-shot and a fully fine-tuned model, the weights of both are mixed linearly. The factor α runs from 0.0 to 1.0 in steps of 0.1.">Statt nur zwischen Zero-Shot und fertig fine-getuntem Modell zu wählen, werden die Gewichte beider linear gemischt. Der Faktor α läuft von 0,0 bis 1,0 in 0,1er-Schritten.</p>
-      <!-- TODO(Ole): Richtung der Interpolation bestätigen (α = 0 Zero-Shot, α = 1 vollständig fine-getunt?). Formel erst danach ergänzen. -->
+      <p data-de="Statt nur zwischen Zero-Shot und fertig fine-getuntem Modell zu wählen, werden die Gewichte beider linear gemischt. Der Faktor α läuft von 0,0 (reines Zero-Shot-Modell) bis 1,0 (vollständig fine-getuntes Modell) in 0,1er-Schritten."
+         data-en="Instead of choosing between zero-shot and a fully fine-tuned model, the weights of both are mixed linearly. The factor α runs from 0.0 (pure zero-shot model) to 1.0 (fully fine-tuned model) in steps of 0.1.">Statt nur zwischen Zero-Shot und fertig fine-getuntem Modell zu wählen, werden die Gewichte beider linear gemischt. Der Faktor α läuft von 0,0 (reines Zero-Shot-Modell) bis 1,0 (vollständig fine-getuntes Modell) in 0,1er-Schritten.</p>
+      <!-- Richtung ist durch die Daten belegt (bei α = 0 sind alle Varianten identisch und gleich dem Zero-Shot-Wert). Optional: Formel ergänzen. -->
 
       <h4 data-de="Setup" data-en="Setup">Setup</h4>
       <dl class="th-facts-grid">
@@ -213,19 +203,12 @@
       <h4 data-de="Streamlit-Prototyp" data-en="Streamlit prototype">Streamlit-Prototyp</h4>
       <p data-de="Zusätzlich gibt es eine Streamlit-App als Prototyp, mit der sich die Suche ausprobieren lässt."
          data-en="There is also a Streamlit app as a prototype to try the search out.">Zusätzlich gibt es eine Streamlit-App als Prototyp, mit der sich die Suche ausprobieren lässt.</p>
-      <!-- TODO(Ole): Screenshot der Streamlit-App nach images/ legen (z. B. images/streamlit-app.png)
-           und den Platzhalter unten durch <img src="../images/streamlit-app.png" alt="..."> ersetzen. -->
-      <div class="img-placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg>
-        <span data-de="Streamlit-Prototyp · Screenshot folgt" data-en="Streamlit prototype · screenshot coming">Streamlit-Prototyp · Screenshot folgt</span>
-      </div>
-
-      <h4 data-de="Hardware-Limits" data-en="Hardware limits">Hardware-Limits</h4>
-      <p data-de="Alles lief auf Consumer-Hardware: einer NVIDIA GTX 1080 mit 8 GB VRAM."
-         data-en="Everything ran on consumer hardware: one NVIDIA GTX 1080 with 8 GB of VRAM.">Alles lief auf Consumer-Hardware: einer NVIDIA GTX 1080 mit 8 GB VRAM.</p>
-      <!-- TODO(Ole): Konkrete Folgen der Hardware-Grenzen ergänzen (Batchgröße, Laufzeiten, was deswegen nicht ging). -->
-      <p class="th-todo" data-de="// konkrete folgen der 8-gb-grenze (batchgröße, laufzeiten) folgen"
-         data-en="// concrete effects of the 8 GB limit (batch size, runtimes) follow">// konkrete folgen der 8-gb-grenze (batchgröße, laufzeiten) folgen</p>
+      <figure class="th-figure">
+        <img src="../images/appScreenshot.jpg" width="2502" height="1362" loading="lazy"
+             alt="Screenshot of the Streamlit prototype in comparison mode" />
+        <figcaption data-de="Vergleichsmodus: zwei Modelle (hier mit verschiedenem α und Sampling) beantworten dieselbe Suchanfrage nebeneinander."
+                    data-en="Comparison mode: two models (here with different α and sampling) answer the same query side by side.">Vergleichsmodus: zwei Modelle (hier mit verschiedenem α und Sampling) beantworten dieselbe Suchanfrage nebeneinander.</figcaption>
+      </figure>
     </section>
 
     <!-- 4. Ergebnisse -->
@@ -237,8 +220,8 @@
             data-en="In-domain (MSR-VTT), the α optimum sits at 0.7–0.9, I would recommend 0.8.">In-Domain (MSR-VTT) liegt das α-Optimum bei 0,7–0,9, ich würde 0,8 empfehlen.</li>
         <li data-de="Out-of-Distribution (Charades) verschiebt es sich auf 0,2–0,6."
             data-en="Out-of-distribution (Charades), it shifts to 0.2–0.6.">Out-of-Distribution (Charades) verschiebt es sich auf 0,2–0,6.</li>
-        <li data-de="1 fps ist die beste Frame-Sampling-Strategie."
-            data-en="1 fps is the best frame-sampling strategy.">1 fps ist die beste Frame-Sampling-Strategie.</li>
+        <li data-de="1 fps ist beim Frame-Sampling die beste Wahl: 2 fps bringt kaum einen Vorteil, braucht aber doppelt so viele Frames."
+            data-en="1 fps is the best choice for frame sampling: 2 fps adds hardly any benefit but needs twice as many frames.">1 fps ist beim Frame-Sampling die beste Wahl: 2 fps bringt kaum einen Vorteil, braucht aber doppelt so viele Frames.</li>
         <li data-de="Die Wahl des Pretraining-Checkpoints wirkt stärker als die untersuchten Optimierungen."
             data-en="The choice of pretraining checkpoint has a bigger effect than the optimizations I studied.">Die Wahl des Pretraining-Checkpoints wirkt stärker als die untersuchten Optimierungen.</li>
       </ul>
@@ -246,9 +229,8 @@
       <div class="th-panel">
         <div class="th-panel-inner">
           <div class="th-panel-label" data-de="// α-explorer" data-en="// α explorer">// α-explorer</div>
-          <!-- TODO(Ole): data/alpha_sweep.json mit echten Werten liefern (Format siehe Kommentar in js/thesis.js).
-               Solange die Datei fehlt, bleibt nur der "Daten folgen"-Zustand sichtbar. -->
-          <div class="alpha-explorer" data-src="../data/alpha_sweep.json" data-table="true" data-state="empty">
+          <!-- Daten: data/alpha_sweep.json (Format siehe Kommentar in js/thesis.js). Ohne JS oder ohne Webserver bleibt der Hinweis unten stehen. -->
+          <div class="alpha-explorer" data-src="../data/alpha_sweep.json" data-table="false" data-simple="true" data-state="empty">
             <div class="alpha-empty">
               <svg class="alpha-ghost" viewBox="0 0 640 200" aria-hidden="true" focusable="false">
                 <g class="ghost-grid">
@@ -268,9 +250,9 @@
                 </g>
               </svg>
               <div class="alpha-empty-text">
-                <div class="alpha-empty-title" data-de="// daten folgen" data-en="// data incoming">// daten folgen</div>
-                <p data-de="Hier landen Regler, Kurven und Wertetabelle für α (In-Domain vs. Out-of-Distribution), sobald die Auswertungsdaten eingebunden sind. Bis dahin: lieber leer als erfunden."
-                   data-en="Slider, curves and a value table for α (in-domain vs. out-of-distribution) will show up here as soon as the evaluation data is wired in. Until then: better empty than made up.">Hier landen Regler, Kurven und Wertetabelle für α (In-Domain vs. Out-of-Distribution), sobald die Auswertungsdaten eingebunden sind. Bis dahin: lieber leer als erfunden.</p>
+                <div class="alpha-empty-title" data-de="// explorer wird geladen" data-en="// loading explorer">// explorer wird geladen</div>
+                <p data-de="Regler und Kurven für α (bekannte vs. fremde Daten) erscheinen hier. Falls nichts passiert: Der Explorer braucht JavaScript und läuft nur über einen Webserver, nicht beim direkten Öffnen der Datei."
+                   data-en="Slider and curves for α (familiar vs. unseen data) appear here. If nothing happens: the explorer needs JavaScript and only works through a web server, not when the file is opened directly.">Regler und Kurven für α (bekannte vs. fremde Daten) erscheinen hier. Falls nichts passiert: Der Explorer braucht JavaScript und läuft nur über einen Webserver, nicht beim direkten Öffnen der Datei.</p>
               </div>
             </div>
             <div class="alpha-live" hidden></div>
@@ -278,9 +260,13 @@
         </div>
       </div>
 
-      <!-- TODO(Ole): Ergebnistabelle mit echten Metrikwerten (R@1 / R@5 / R@10 je Sampling-Strategie und Checkpoint) ergänzen. -->
-      <p class="th-todo" data-de="// ergebnistabelle (R@1 / R@5 / R@10 je sampling-strategie und checkpoint) folgt mit den finalen Auswertungen"
-         data-en="// results table (R@1 / R@5 / R@10 per sampling strategy and checkpoint) follows with the final evaluation">// ergebnistabelle (R@1 / R@5 / R@10 je sampling-strategie und checkpoint) folgt mit den finalen Auswertungen</p>
+      <h4 data-de="Effizienz" data-en="Efficiency">Effizienz</h4>
+      <ul>
+        <li data-de="Partielles Fine-Tuning dauerte nur 55 % so lange wie das vollständige und erreichte beinahe dieselben Ergebnisse."
+            data-en="Partial fine-tuning took only 55% as long as full fine-tuning and reached almost the same results.">Partielles Fine-Tuning dauerte nur 55 % so lange wie das vollständige und erreichte beinahe dieselben Ergebnisse.</li>
+        <li data-de="1 fps war deutlich effizienter als 2 fps: halb so viele Frames bei kaum schlechteren Ergebnissen."
+            data-en="1 fps was clearly more efficient than 2 fps: half as many frames with hardly any loss in results.">1 fps war deutlich effizienter als 2 fps: halb so viele Frames bei kaum schlechteren Ergebnissen.</li>
+      </ul>
     </section>
 
     <!-- 5. Grenzen -->
@@ -288,9 +274,6 @@
       <h3 id="s5" data-de="// 05 grenzen &amp; was ich anders machen würde" data-en="// 05 limits &amp; what I would do differently">// 05 grenzen &amp; was ich anders machen würde</h3>
       <p data-de="Die Arbeit hat Schwächen, und die gehören dazu. Das sind die Punkte, die ich benennen will:"
          data-en="The thesis has weaknesses, and they belong here. These are the points I want to name:">Die Arbeit hat Schwächen, und die gehören dazu. Das sind die Punkte, die ich benennen will:</p>
-      <!-- TODO(Ole): Beide Punkte (Warmup, α-Auswahl) gegen die finale Fassung der Arbeit bestätigen.
-           Optional: weitere Grenzen (z. B. schmale Basis: ein Backbone, zwei Checkpoints, Charades als einziger OOD-Test) nur auf Wunsch ergänzen.
-           Stehen sie dort anders oder gar nicht, hier anpassen bzw. streichen. -->
       <ul>
         <li><span><strong data-de="Warmup falsch konfiguriert." data-en="Misconfigured warmup.">Warmup falsch konfiguriert.</strong>
           <span data-de="Der Default von 10.000 Warmup-Schritten blieb gesetzt, dadurch war die effektive Lernrate sehr klein."
@@ -299,20 +282,16 @@
           <span data-de="Das α-Optimum wurde auf denselben Daten bestimmt, auf denen die Ergebnisse berichtet werden. Sauberer wäre ein eigener Validierungs-Split gewesen."
                 data-en="The α optimum was determined on the same data the results are reported on. A separate validation split would have been cleaner.">Das α-Optimum wurde auf denselben Daten bestimmt, auf denen die Ergebnisse berichtet werden. Sauberer wäre ein eigener Validierungs-Split gewesen.</span></span></li>
       </ul>
-      <p class="th-todo" data-de="// abgleich mit der finalen fassung der arbeit steht noch aus"
-         data-en="// check against the final version of the thesis is still pending">// abgleich mit der finalen fassung der arbeit steht noch aus</p>
     </section>
 
     <!-- 6. Links / Downloads -->
     <section class="detail-desc th-sec" aria-labelledby="s6">
       <h3 id="s6" data-de="// 06 links &amp; downloads" data-en="// 06 links &amp; downloads">// 06 links &amp; downloads</h3>
       <div class="th-links">
-        <!-- TODO(Ole): PDF (nur falls freigegeben), Repo und Slides verlinken; "is-soon" und aria-disabled entfernen. -->
-        <span class="btn-primary is-soon" aria-disabled="true"><span>$ ./read-thesis</span> <span class="soon-note" data-de="· folgt" data-en="· soon">· folgt</span></span>
-        <span class="btn-ghost is-soon" aria-disabled="true"><span>$ ./github</span> <span class="soon-note" data-de="· folgt" data-en="· soon">· folgt</span></span>
-        <span class="btn-ghost is-soon" aria-disabled="true"><span>$ ./slides</span> <span class="soon-note" data-de="· folgt" data-en="· soon">· folgt</span></span>
+        <!-- Slides-Button entfernt, solange es keine Folien gibt. Bei Bedarf ergänzen: <a ... class="btn-ghost">$ ./slides ↗</a> -->
+        <a href="https://github.com/Elociraptor/bachelor_thesis_code/blob/main/Optimierungsstrategien%20f%C3%BCr%20CLIP-basierte%20Text-zu-Video-Retrieval-Systeme.pdf" target="_blank" rel="noopener" class="btn-primary">$ ./read-thesis ↗</a>
+        <a href="https://github.com/Elociraptor/bachelor_thesis_code" target="_blank" rel="noopener" class="btn-ghost">$ ./github ↗</a>
       </div>
-      <!-- TODO(Ole): Finale Note (erst nach Bewertung) und Abgabe-/Kolloquiumsdatum ergänzen, falls du sie zeigen willst. -->
     </section>
 
   </div>

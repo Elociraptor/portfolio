@@ -37,8 +37,8 @@
   // Nur Fallback, siehe Kommentar oben.
   const PROJECTS_FALLBACK = [
     { slug: 'xcrawler',         title: 'XCrawler',                          href: 'projects/xcrawler.html' },
-    { slug: 'battery-monitoring', title: 'Battery-Monitoring',              href: 'projects/battery-monitoring.html' },
-    { slug: 'dkwdp',            title: 'Der kleine Weg des Programmierens', href: 'projects/dkwdp.html' },
+    { slug: 'battery-monitoring', title: 'Battery-Monitoring mit ML',       href: 'projects/battery-monitoring.html' },
+    { slug: 'dkwdp',            title: 'Coder Dojo',                        href: 'projects/dkwdp.html' },
     { slug: 'asml',             title: 'ASML — Application Framework',      href: 'projects/asml.html' },
     { slug: 'knn',              title: 'kNearestNeighbor',                  href: 'projects/knn.html' },
     { slug: 'smartgarden',      title: 'smartgarden',                       href: 'projects/smartgarden.html' },
@@ -148,7 +148,7 @@
         return { out: (l) => [
           kv('name', 'Ole Marwede'),
           kv('study', tr(l, 'M.Sc. Informatik, HU Berlin', 'M.Sc. Computer Science, HU Berlin')),
-          kv('bachelor', tr(l, 'Medieninformatik, HTW Berlin', 'Media Informatics, HTW Berlin')),
+          kv('bachelor', tr(l, 'Internationale Medieninformatik, HTW Berlin', 'International Media Informatics, HTW Berlin')),
           kv('base', 'Berlin'),
           kv('github', 'Elociraptor'),
           hint(tr(l, 'Mehr: cat about.md · cat now.md', 'More: cat about.md · cat now.md')),
@@ -198,18 +198,14 @@
         }
 
         if (key === 'now') {
-          /* TODO(Ole): Inhalte von now.md prüfen (Thesis-Stand, Master-Schwerpunkt,
-             Werkstudent-Tätigkeit so allgemein lassen, wie Freshfields es freigibt). */
+          /* Werkstudent-Zeile ist raus, weil Freshfields im Nov 2026 endet. */
           return { out: (l) => [
-            kv('thesis', tr(l, 'Kolloquium steht an', 'defense coming up')),
-            kv('master', tr(l, 'Informatik an der HU, Schwerpunkt ML', 'computer science at HU, focus on ML')),
-            kv('work',   tr(l, 'Werkstudent Legal Tech: Low-Code und KI-Workflows', 'working student in legal tech: low-code and AI workflows')),
+            kv('thesis', tr(l, 'abgeschlossen, Note 1,0', 'done, grade 1.0')),
+            kv('master', tr(l, 'Informatik an der HU, Schwerpunkte ML und Computer Vision', 'computer science at HU, focus on ML and computer vision')),
           ] };
         }
 
         if (key === 'thesis') {
-          /* TODO(Ole): Metriken (R@1 / R@5 / R@10) und finale Note ergänzen, sobald final.
-             Englischer Titel ist eine eigene Übersetzung, offiziellen Titel prüfen. */
           return { out: (l) => [
             out1(tr(l,
               'Optimierungsstrategien für CLIP-basierte Text-zu-Video-Retrieval-Systeme',
@@ -220,11 +216,14 @@
             kv('wise-ft',  tr(l, 'α von 0,0 bis 1,0 in 0,1er-Schritten', 'α from 0.0 to 1.0 in steps of 0.1')),
             kv('data',     tr(l, 'MSR-VTT, Charades als Out-of-Distribution-Test', 'MSR-VTT, Charades as out-of-distribution test')),
             kv('runs',     tr(l, '~200 Messungen auf einer GTX 1080 (8 GB)', '~200 measurements on one GTX 1080 (8 GB)')),
+            kv('grade',    tr(l, '1,0', '1.0')),
             blank,
             txt(tr(l,
-              'α-Optimum in-domain bei 0,7–0,9, out-of-distribution bei 0,2–0,6. 1 fps ist am besten. Der Pretraining-Checkpoint wirkt stärker als die Optimierungen, die ich untersucht habe.',
-              'α optimum sits at 0.7–0.9 in-domain and 0.2–0.6 out-of-distribution. 1 fps works best. The pretraining checkpoint matters more than the optimizations I tested.')),
-            hint(tr(l, 'Metriken (R@1 / R@5 / R@10) folgen mit den finalen Auswertungen.', 'Metrics (R@1 / R@5 / R@10) follow with the final evaluation.')),
+              'α-Optimum in-domain bei 0,7–0,9, out-of-distribution bei 0,2–0,6. 1 fps reicht: 2 fps bringt kaum etwas, kostet aber doppelt so viele Frames. Der Pretraining-Checkpoint wirkt stärker als die Optimierungen, die ich untersucht habe.',
+              'α optimum sits at 0.7–0.9 in-domain and 0.2–0.6 out-of-distribution. 1 fps is enough: 2 fps adds hardly anything but costs twice the frames. The pretraining checkpoint matters more than the optimizations I tested.')),
+            blank,
+            kv('efficiency', tr(l, 'partielles Fine-Tuning in 55 % der Zeit', 'partial fine-tuning in 55% of the time')),
+            hint(tr(l, 'Alle Messwerte und den Code gibt es auf GitHub: Elociraptor/bachelor_thesis_code', 'All measurements and the code are on GitHub: Elociraptor/bachelor_thesis_code')),
             link('→ ', 'open thesis', 'open thesis'),
             link('→ ', 'open bachelorarbeit', 'open bachelorarbeit'),
           ] };

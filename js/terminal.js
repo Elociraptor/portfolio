@@ -14,10 +14,7 @@
 (function () {
   'use strict';
 
-  /* TODO(Ole): Status steht nur noch im Hero-Badge (nicht mehr im Terminal), bewusst vorsichtig formuliert; Kontakt-Text gleich mitprüfen.
-     Fließtext, "now:" und "gpa:" prüfen. Die finale Bachelor-Note
-     steht bewusst NICHT drin (erst nach Bewertung), "1.15" ist überholt.
-     Studienbezeichnungen exakt wie im Zeugnis / Immatrikulation eintragen. */
+  /* Intro-Texte (cat about.md). Der Status steht nur im Hero-Badge, "now:" ohne Werkstudent-Teil (Freshfields endet Nov 2026). */
   const TERMINAL_LINES = {
     de: [
       { type: 'cmd',   text: '$ cat about.md' },
@@ -25,12 +22,12 @@
       { type: 'kv',    key: 'name',    val: 'Ole Marwede' },
       { type: 'kv',    key: 'degree',  val: 'M.Sc. Informatik · ML' },
       { type: 'kv',    key: 'school',  val: 'HU Berlin' },
-      { type: 'kv',    key: 'gpa',     val: 'B.Sc. folgt (Note nach Bewertung)' },
-      { type: 'kv',    key: 'now',     val: 'Thesis, Master-Start, Legal Tech' },
+      { type: 'kv',    key: 'gpa',     val: 'B.Sc. 1,1 · Bachelorarbeit 1,0' },
+      { type: 'kv',    key: 'now',     val: 'Master-Start, Machine Learning' },
       { type: 'blank', text: '' },
-      { type: 'text',  text: 'Ich suche mit CLIP nach Szenen in Videos, für die Bachelorarbeit auf einer einzigen GTX 1080.' },
-      { type: 'text',  text: 'Davor: Praktikum bei ASML und eine Lernplattform für Kinder, gebaut im 7er-Team.' },
-      { type: 'text',  text: 'Ich schreibe lieber Code, der läuft, als Folien, die es versprechen.' },
+      { type: 'text',  text: 'Für die Bachelorarbeit eine CLIP-Videosuche gebaut, die auf einer einzigen GTX 1080 läuft.' },
+      { type: 'text',  text: 'Davor: Freshfields (Werkstudent, Legal Tech mit ML-Komponente), ASML (Praktikum) und eine Lernplattform für Kinder.' },
+      { type: 'text',  text: 'Aktuell: Master Informatik (Machine Learning, Computer Vision), auf Jobsuche.' },
       { type: 'blank', text: '' },
       { type: 'kv',    key: 'github',  val: 'Elociraptor' },
       { type: 'blank', text: '' },
@@ -42,12 +39,12 @@
       { type: 'kv',    key: 'name',    val: 'Ole Marwede' },
       { type: 'kv',    key: 'degree',  val: 'M.Sc. Computer Science · ML' },
       { type: 'kv',    key: 'school',  val: 'HU Berlin' },
-      { type: 'kv',    key: 'gpa',     val: 'B.Sc. pending (grade after review)' },
-      { type: 'kv',    key: 'now',     val: 'thesis, master start, legal tech' },
+      { type: 'kv',    key: 'gpa',     val: 'B.Sc. 1.1 · thesis 1.0' },
+      { type: 'kv',    key: 'now',     val: 'master start, machine learning' },
       { type: 'blank', text: '' },
-      { type: 'text',  text: 'I search for scenes in videos with CLIP, for my bachelor thesis on a single GTX 1080.' },
-      { type: 'text',  text: 'Before that: an internship at ASML and a learning platform for kids, built in a team of 7.' },
-      { type: 'text',  text: 'I would rather ship code that runs than slides that promise it.' },
+      { type: 'text',  text: 'For the bachelor thesis, built a CLIP video search that runs on a single GTX 1080.' },
+      { type: 'text',  text: 'Before that: Freshfields (working student, legal tech with an ML component), ASML (internship) and a learning platform for kids.' },
+      { type: 'text',  text: 'Now: master in computer science (machine learning, computer vision), looking for a job.' },
       { type: 'blank', text: '' },
       { type: 'kv',    key: 'github',  val: 'Elociraptor' },
       { type: 'blank', text: '' },
